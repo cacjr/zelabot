@@ -122,3 +122,24 @@ def test_api_de_clima_fora_usa_caminho_seguro(monkeypatch):
     prioridade.reiniciar_cache_execucao()
     r = prioridade.avaliar("arvores", "Galho quebrado na calçada", "Itaquera")
     assert r["chuva_24h_mm"] is None and "indisponível" in r["justificativa"]
+
+
+def test_estado_salva_mesmo_com_arquivo_travado(monkeypatch):
+    # simula o OneDrive travando o arquivo nas 2 primeiras tentativas de troca
+    from pathlib import Path
+    original = Path.replace
+    falhas = {"n": 0}
+
+    def replace_travado(self, alvo):
+        if falhas["n"] < 2:
+            falhas["n"] += 1
+            raise PermissionError("arquivo em uso")
+        return original(self, alvo)
+
+    monkeypatch.setattr(Path, "replace", replace_travado)
+    reg = resiliencia.RegistroJSON("teste_travado")
+    reg.definir("X-1", {"status": "ok"})
+    monkeypatch.setattr(Path, "replace", original)
+    assert falhas["n"] == 2
+    assert resiliencia.RegistroJSON("teste_travado").get("X-1") == {"status": "ok"}
+    reg.caminho.unlink()

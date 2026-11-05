@@ -51,6 +51,7 @@ O enunciado pede pelo menos 3 temas da disciplina, cada um com função real no 
 | Senha errada | Não insiste; manda para pendentes e registra o erro. |
 | Arquivo corrompido | Quarentena com o motivo; os outros arquivos seguem. |
 | Arquivo ausente | Registra no log e continua. |
+| Arquivo de estado travado (OneDrive, antivírus) | Tenta salvar de novo até 10 vezes, com espera crescente; se continuar travado, grava direto para não perder o dado. |
 | Dado inválido | Aba "Rejeitadas" com o motivo e uma mensagem para o cidadão. |
 | Rodar duas vezes | Idempotência: cada solicitação processada fica registrada e não é cadastrada de novo. |
 | Erro inesperado | Último `try/except` no `main.py` grava o traceback completo no log. |

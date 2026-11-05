@@ -70,7 +70,19 @@ class RegistroJSON:
         temporario = self.caminho.with_suffix(".tmp")
         with open(temporario, "w", encoding="utf-8") as f:
             json.dump(self.dados, f, ensure_ascii=False, indent=2)
-        temporario.replace(self.caminho)
+        # OneDrive/antivirus podem travar o arquivo por um instante enquanto
+        # sincronizam/verificam: tenta a troca de novo antes de desistir
+        for tentativa in range(10):
+            try:
+                temporario.replace(self.caminho)
+                return
+            except PermissionError:
+                time.sleep(0.1 * (tentativa + 1))
+        # ultimo recurso: grava direto no arquivo final (perde a atomicidade, mas nao perde o dado)
+        log.warning("Troca atomica de %s bloqueada pelo sistema. Gravando direto.", self.caminho.name)
+        with open(self.caminho, "w", encoding="utf-8") as f:
+            json.dump(self.dados, f, ensure_ascii=False, indent=2)
+        temporario.unlink(missing_ok=True)
 
     def __contains__(self, chave):
         return chave in self.dados

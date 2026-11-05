@@ -113,9 +113,12 @@ Priorizamos o **recall**: deixar passar um caso de risco é muito pior que dar u
 | Senha errada | `PORTAL_SENHA` inválida | 2 pendentes; após corrigir a senha, 2 registradas | sim |
 | Arquivo ausente | caminho inexistente | registrado no log e execução concluída | sim |
 
-Além disso, `python -m pytest` roda **18 testes automatizados** (validação, máscara de dados pessoais, leitura em CP1252, JSON corrompido, retry, prioridade com chuva forte e com API fora do ar), todos passando.
+Além disso, `python -m pytest` roda **19 testes automatizados** (validação, máscara de dados pessoais, leitura em CP1252, JSON corrompido, retry, prioridade com chuva forte e com API fora do ar, arquivo de estado travado), todos passando.
 
-**Um caso de falha real que apareceu no desenvolvimento:** na primeira execução o Chrome não abriu (o driver não foi encontrado). O robô não caiu: mandou as 23 solicitações para a fila de pendentes, e na execução seguinte, com o driver resolvido, registrou todas sem duplicar nada. Foi a melhor prova de que a fila de pendentes funciona.
+**Dois casos de falha real que apareceram no desenvolvimento:**
+
+1. Na primeira execução o Chrome não abriu (o driver não foi encontrado). O robô não caiu: mandou as 23 solicitações para a fila de pendentes, e na execução seguinte, com o driver resolvido, registrou todas sem duplicar nada. Foi a melhor prova de que a fila de pendentes funciona.
+2. Quando levamos o projeto para uma pasta sincronizada pelo OneDrive, a demonstração de falhas parou com `PermissionError: Acesso negado` ao salvar `estado/pendentes.json`. O OneDrive trava o arquivo por um instante enquanto sincroniza, e isso quebrava o salvamento atômico (grava num `.tmp` e troca). Corrigimos fazendo o salvamento tentar de novo com espera crescente e, se ainda assim falhar, gravar direto. Criamos um teste que simula o arquivo travado. Foi um erro que nenhum cenário planejado previa, e mostra por que tratar falhas de I/O importa fora do computador de quem programou.
 
 ## 4. Análise dos erros
 

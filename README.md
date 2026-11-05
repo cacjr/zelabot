@@ -114,7 +114,7 @@ Pronto. O robô sobe o portal simulado, processa os 5 arquivos de exemplo da pas
 | `python main.py falhas` | Roda 8 cenários de falha de propósito e confere se o robô seguiu o caminho seguro |
 | `python main.py treinar` | Retreina o classificador |
 | `python main.py reset` | Apaga estado e saídas para rodar do zero (a pasta `entrada/` é mantida) |
-| `python -m pytest` | Roda os 18 testes automatizados |
+| `python -m pytest` | Roda os 19 testes automatizados |
 
 Dica para apresentação: colocando `NAVEGADOR_VISIVEL=1` no `.env`, dá para ver o Chrome preenchendo o portal sozinho.
 
