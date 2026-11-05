@@ -1,0 +1,14 @@
+# segredos
+.env
+
+# ambiente e cache
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# gerado pelo robo a cada execucao (as evidencias oficiais ficam em docs/evidencias)
+saida/
+estado/
+modelos/*.joblib
+portal/dados_portal.json

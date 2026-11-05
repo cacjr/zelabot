@@ -1,0 +1,58 @@
+[
+  {
+    "cenario": "API de clima fora do ar",
+    "falha_simulada": "URL da API apontando para um host inexistente",
+    "esperado": "robô segue sem o critério de chuva e explica isso na justificativa",
+    "obtido": "11 de 11 casos de bueiro/arvore com 'previsão indisponível'; disjuntor aberto após 2 falhas",
+    "ok": true
+  },
+  {
+    "cenario": "Portal da prefeitura fora do ar",
+    "falha_simulada": "portal desligado",
+    "esperado": "nada se perde: tudo vai para a fila de pendentes",
+    "obtido": "0 registradas, 23 na fila de pendentes",
+    "ok": true
+  },
+  {
+    "cenario": "Arquivo corrompido",
+    "falha_simulada": "JSON cortado no meio (exportacao_interrompida.json)",
+    "esperado": "arquivo vai para quarentena com o motivo e os outros 4 são lidos",
+    "obtido": "1 em quarentena (JSONDecodeError), 31 registros dos outros arquivos lidos",
+    "ok": true
+  },
+  {
+    "cenario": "Dados inválidos",
+    "falha_simulada": "data no futuro, texto 'oi', bairro inexistente e linha duplicada",
+    "esperado": "rejeita com motivo e mensagem ao cidadão; duplicata ignorada",
+    "obtido": "3 rejeitadas, cada uma com motivo (APP-0099, TOT-0002, TOT-0007), 1 duplicata ignorada",
+    "ok": true
+  },
+  {
+    "cenario": "Portal instável (erro 503)",
+    "falha_simulada": "portal responde 503 a cada 4 cadastros",
+    "esperado": "retry com espera recupera e a fila de pendentes zera",
+    "obtido": "23/23 registradas, 7 novas tentativas automáticas, fila de pendentes = 0",
+    "ok": true
+  },
+  {
+    "cenario": "Execução repetida",
+    "falha_simulada": "rodar o robô de novo com os mesmos arquivos",
+    "esperado": "nada é cadastrado em dobro no portal",
+    "obtido": "31 já processadas ignoradas; portal continuou com 23 registros",
+    "ok": true
+  },
+  {
+    "cenario": "Senha do portal errada",
+    "falha_simulada": "PORTAL_SENHA inválida no .env",
+    "esperado": "não insiste no login, guarda na fila e registra quando a senha é corrigida",
+    "obtido": "1ª execução: 2 pendentes (CredenciaisInvalidas); após corrigir: 2 registradas",
+    "ok": true
+  },
+  {
+    "cenario": "Arquivo ausente",
+    "falha_simulada": "caminho de arquivo que não existe",
+    "esperado": "registra no log e termina a execução normalmente",
+    "obtido": "status do arquivo: ausente; relatório gerado normalmente",
+    "ok": true
+  }
+]

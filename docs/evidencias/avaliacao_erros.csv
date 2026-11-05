@@ -1,0 +1,16 @@
+texto,categoria_esperada,prevista,confianca,segunda_opcao,foi_para_revisao
+Gostaria de elogiar o atendimento da subprefeitura,fora_escopo,pavimentacao,0.616,limpeza (12%),False
+"Terreno baldio cheio de lixo, já apareceu escorpião",limpeza,drenagem,0.614,limpeza (19%),False
+Árvore muito grande tampando a iluminação do poste,arvores,iluminacao,0.607,arvores (33%),False
+Papeleira da praça transbordando e lixo voando,limpeza,drenagem,0.543,iluminacao (15%),True
+Cachorro latindo a noite toda no quintal ao lado,fora_escopo,iluminacao,0.53,pavimentacao (16%),True
+"Praça sem iluminação nenhuma, virou ponto de assalto",iluminacao,limpeza,0.518,iluminacao (35%),True
+Semáforo do cruzamento está desligado,fora_escopo,iluminacao,0.506,pavimentacao (36%),True
+"Ponto de ônibus sem luz nenhuma, as mulheres têm medo de esperar ali",iluminacao,limpeza,0.495,iluminacao (25%),True
+Ônibus da linha 857 está atrasando muito,fora_escopo,pavimentacao,0.484,iluminacao (20%),True
+Tem um cachorro morto na beira da rua desde ontem,limpeza,pavimentacao,0.471,limpeza (38%),True
+Quero saber o horário do posto de saúde,fora_escopo,iluminacao,0.393,drenagem (22%),True
+Ralo da rua todo tampado de lixo,drenagem,limpeza,0.359,drenagem (32%),True
+Pedido de vaga em creche para meu filho,fora_escopo,pavimentacao,0.306,drenagem (28%),True
+Vizinho faz churrasco com som alto todo domingo,fora_escopo,pavimentacao,0.283,iluminacao (28%),True
+Carro abandonado há meses na rua,fora_escopo,arvores,0.265,pavimentacao (23%),True

@@ -1,0 +1,213 @@
+{
+  "amostra": {
+    "total": 59,
+    "no_escopo": 51,
+    "fora_escopo": 8,
+    "por_categoria": {
+      "pavimentacao": 11,
+      "iluminacao": 10,
+      "limpeza": 10,
+      "drenagem": 10,
+      "arvores": 10,
+      "fora_escopo": 8
+    }
+  },
+  "classificador_ml": {
+    "acuracia": 0.863,
+    "f1_macro": 0.861,
+    "por_classe": {
+      "pavimentacao": {
+        "precisao": 0.92,
+        "recall": 1.0,
+        "f1": 0.96,
+        "n": 11
+      },
+      "iluminacao": {
+        "precisao": 0.89,
+        "recall": 0.8,
+        "f1": 0.84,
+        "n": 10
+      },
+      "limpeza": {
+        "precisao": 0.7,
+        "recall": 0.7,
+        "f1": 0.7,
+        "n": 10
+      },
+      "drenagem": {
+        "precisao": 0.82,
+        "recall": 0.9,
+        "f1": 0.86,
+        "n": 10
+      },
+      "arvores": {
+        "precisao": 1.0,
+        "recall": 0.9,
+        "f1": 0.95,
+        "n": 10
+      }
+    }
+  },
+  "linha_de_base_palavras_chave": {
+    "acuracia": 0.706,
+    "f1_macro": 0.795,
+    "sem_resposta": 13
+  },
+  "robo_com_limiar": {
+    "limiar": 0.55,
+    "automatizadas_pct": 71.2,
+    "acerto_nas_automatizadas_pct": 92.9,
+    "erros_silenciosos": 3,
+    "fora_escopo_para_revisao": "7/8",
+    "erros_seguros_na_revisao": 5,
+    "acertos_mandados_a_revisao": 5,
+    "automatizadas_no_escopo": 41
+  },
+  "varredura_limiar": [
+    {
+      "limiar": 0.3,
+      "automatizadas_pct": 96.6,
+      "acerto_nas_automatizadas_pct": 77.2,
+      "erros_silenciosos": 13,
+      "fora_escopo_para_revisao": "2/8",
+      "erros_seguros_na_revisao": 0,
+      "acertos_mandados_a_revisao": 0,
+      "automatizadas_no_escopo": 51
+    },
+    {
+      "limiar": 0.35,
+      "automatizadas_pct": 94.9,
+      "acerto_nas_automatizadas_pct": 78.6,
+      "erros_silenciosos": 12,
+      "fora_escopo_para_revisao": "3/8",
+      "erros_seguros_na_revisao": 0,
+      "acertos_mandados_a_revisao": 0,
+      "automatizadas_no_escopo": 51
+    },
+    {
+      "limiar": 0.4,
+      "automatizadas_pct": 89.8,
+      "acerto_nas_automatizadas_pct": 81.1,
+      "erros_silenciosos": 10,
+      "fora_escopo_para_revisao": "4/8",
+      "erros_seguros_na_revisao": 1,
+      "acertos_mandados_a_revisao": 1,
+      "automatizadas_no_escopo": 49
+    },
+    {
+      "limiar": 0.45,
+      "automatizadas_pct": 88.1,
+      "acerto_nas_automatizadas_pct": 80.8,
+      "erros_silenciosos": 10,
+      "fora_escopo_para_revisao": "4/8",
+      "erros_seguros_na_revisao": 1,
+      "acertos_mandados_a_revisao": 2,
+      "automatizadas_no_escopo": 48
+    },
+    {
+      "limiar": 0.5,
+      "automatizadas_pct": 79.7,
+      "acerto_nas_automatizadas_pct": 85.1,
+      "erros_silenciosos": 7,
+      "fora_escopo_para_revisao": "5/8",
+      "erros_seguros_na_revisao": 3,
+      "acertos_mandados_a_revisao": 4,
+      "automatizadas_no_escopo": 44
+    },
+    {
+      "limiar": 0.55,
+      "automatizadas_pct": 71.2,
+      "acerto_nas_automatizadas_pct": 92.9,
+      "erros_silenciosos": 3,
+      "fora_escopo_para_revisao": "7/8",
+      "erros_seguros_na_revisao": 5,
+      "acertos_mandados_a_revisao": 5,
+      "automatizadas_no_escopo": 41
+    },
+    {
+      "limiar": 0.6,
+      "automatizadas_pct": 71.2,
+      "acerto_nas_automatizadas_pct": 92.9,
+      "erros_silenciosos": 3,
+      "fora_escopo_para_revisao": "7/8",
+      "erros_seguros_na_revisao": 5,
+      "acertos_mandados_a_revisao": 5,
+      "automatizadas_no_escopo": 41
+    },
+    {
+      "limiar": 0.65,
+      "automatizadas_pct": 64.4,
+      "acerto_nas_automatizadas_pct": 100.0,
+      "erros_silenciosos": 0,
+      "fora_escopo_para_revisao": "8/8",
+      "erros_seguros_na_revisao": 7,
+      "acertos_mandados_a_revisao": 6,
+      "automatizadas_no_escopo": 38
+    },
+    {
+      "limiar": 0.7,
+      "automatizadas_pct": 55.9,
+      "acerto_nas_automatizadas_pct": 100.0,
+      "erros_silenciosos": 0,
+      "fora_escopo_para_revisao": "8/8",
+      "erros_seguros_na_revisao": 7,
+      "acertos_mandados_a_revisao": 11,
+      "automatizadas_no_escopo": 33
+    }
+  ],
+  "regra_de_urgencia": {
+    "recall": 0.929,
+    "precisao": 0.812,
+    "urgentes_reais": 14,
+    "urgentes_perdidos": [
+      "Semáforo do cruzamento está desligado"
+    ],
+    "alarmes_falsos": [
+      "Papeleira da praça transbordando e lixo voando",
+      "Quero saber o horário do posto de saúde",
+      "Pedido de vaga em creche para meu filho"
+    ]
+  },
+  "palavras_que_mais_pesam": {
+    "arvores": [
+      "arvore",
+      "tronco",
+      "caiu",
+      "caiu na",
+      "galhada",
+      "uma"
+    ],
+    "drenagem": [
+      "chove",
+      "agua",
+      "tampa na",
+      "tampa",
+      "sem tampa",
+      "bueiro"
+    ],
+    "iluminacao": [
+      "poste",
+      "piscando",
+      "luminaria",
+      "luz",
+      "lampada",
+      "do poste"
+    ],
+    "limpeza": [
+      "lixo",
+      "entulho",
+      "jogaram",
+      "remocao",
+      "virou ponto",
+      "virou"
+    ],
+    "pavimentacao": [
+      "buraco",
+      "buraco na",
+      "asfalto",
+      "tapa",
+      "de tapa",
+      "um"
+    ]
+  }
+}

@@ -1,0 +1,57 @@
+[
+  {
+    "id_solicitacao": "WEB-0001",
+    "data_hora": "2026-11-03 09:00",
+    "canal": "site",
+    "nome": "Fabio Demo",
+    "bairro": "Sé",
+    "endereco": "Av. Brasil, 604",
+    "latitude": -23.54877,
+    "longitude": -46.62875,
+    "descricao": "Rua inteira esburacada, o ônibus nem quer mais entrar no bairro"
+  },
+  {
+    "id_solicitacao": "WEB-0002",
+    "data_hora": "2026-11-03 09:00",
+    "canal": "site",
+    "nome": "Gabi Simulada",
+    "bairro": "Jabaquara",
+    "endereco": "Av. Inajar de Souza, 1579",
+    "latitude": -23.65019,
+    "longitude": -46.64196,
+    "descricao": "Poste com fio solto pendurado e soltando faísca, perigo de choque!!"
+  },
+  {
+    "id_solicitacao": "WEB-0003",
+    "data_hora": "2026-11-03 09:00",
+    "canal": "site",
+    "nome": "Diego Sintetico",
+    "bairro": "Pinheiros",
+    "endereco": "Av. Itaquera, 1423",
+    "latitude": -23.56853,
+    "longitude": -46.70537,
+    "descricao": "Animal morto na calçada há 3 dias, cheiro insuportável"
+  },
+  {
+    "id_solicitacao": "WEB-0004",
+    "data_hora": "2026-11-03 09:00",
+    "canal": "site",
+    "nome": "Ana Teste",
+    "bairro": "Mooca",
+    "endereco": "Rua Sete de Setembro, 1910",
+    "latitude": -23.56032,
+    "longitude": -46.60278,
+    "descricao": "Sarjeta obstruída, água parada e foco de dengue. CPF 123.456.789-09 para contato"
+  },
+  {
+    "id_solicitacao": "WEB-0005",
+    "data_hora": "2026-11-03 09:00",
+    "canal": "site",
+    "nome": "Diego Sintetico",
+    "bairro": "Brasilândia",
+    "endereco": "Rua da Mooca, 1607",
+    "latitude": -23.46941,
+    "longitude": -46.69468,
+    "descricao": "Pedido de poda de árvore grande em frente ao posto de saúde"
+  }
+]

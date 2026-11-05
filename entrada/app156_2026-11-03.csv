@@ -1,0 +1,13 @@
+id_solicitacao,data_hora,canal,nome,bairro,endereco,latitude,longitude,descricao
+APP-0001,2026-11-03 08:15,app,Gabi Simulada,Brasilândia,"Rua dos Têxteis, 532",-23.46336,-46.696,"Tem um buraco enorme na frente do número 120, já vi moto caindo ali semana passada"
+APP-0002,2026-11-03 09:15,app,Ana Teste,Brasilândia,"Rua das Flores, 2303",-23.46387,-46.69125,"Poste apagado na esquina faz uns 10 dias, tá muito perigoso voltar a pé à noite"
+APP-0003,2026-11-03 10:15,app,Ana Teste,Capão Redondo,"Rua do Comércio, 1778",-23.66876,-46.78069,"Jogaram um sofá e um monte de entulho na calçada, não dá pra passar com carrinho de bebê"
+APP-0004,2026-11-03 11:15,app,Lucas Mock,Santana,"Rua da Mooca, 1673",-23.50389,-46.62428,"Bueiro entupido, qualquer chuvinha a rua vira um rio. Meu telefone é (11) 98765-4321"
+APP-0005,2026-11-03 12:15,app,Heitor Fake,Pinheiros,"Rua Sete de Setembro, 780",-23.56051,-46.69611,"A árvore da praça está inclinada e com rachadura no tronco, tem fio passando do lado, risco de cair em cima das crianças"
+APP-0006,2026-11-03 13:15,app,Gabi Simulada,Santana,"Rua Sete de Setembro, 1191",-23.49404,-46.62228,Asfalto afundou perto do ponto de ônibus
+APP-0007,2026-11-03 14:15,app,Ana Teste,Pinheiros,"Av. Brasil, 74",-23.5671,-46.69544,Lâmpada do poste fica piscando a noite toda
+APP-0008,2026-11-03 15:15,app,Carla Exemplo,Butantã,"Av. Brasil, 572",-23.56872,-46.70935,Galho pendurado em cima da calçada da escola
+APP-0009,2026-11-03 16:15,app,Lucas Mock,Jabaquara,"Av. Itaquera, 1753",-23.64403,-46.64173,"Lixo acumulado há 2 semanas, já tem rato aparecendo"
+APP-0010,2026-11-03 17:15,app,Iara Amostra,Butantã,"Rua dos Têxteis, 1853",-23.57284,-46.71239,"Bueiro sem tampa no meio da calçada, um idoso quase caiu dentro"
+APP-0001,2026-11-03 08:15,app,Gabi Simulada,Brasilândia,"Rua dos Têxteis, 532",-23.46336,-46.696,"Tem um buraco enorme na frente do número 120, já vi moto caindo ali semana passada"
+APP-0099,2026-11-03 09:00,app,Joao Inventado,Bairro Inexistente,"Rua das Flores, 2377",abc,,"Buraco gigante na rua, carro quebrou a roda"

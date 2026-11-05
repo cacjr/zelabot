@@ -1,0 +1,60 @@
+texto,categoria_esperada,urgente_esperado
+"Tem um buracão na descida da ladeira, já vi dois motoqueiros caindo",pavimentacao,1
+"Asfalto todo esfarelando na rua de trás do mercado",pavimentacao,0
+"Fizeram uma obra e deixaram a rua cheia de remendo, o carro pula inteiro",pavimentacao,0
+"Abriu uma cratera depois da chuva, dá pra ver o cano lá embaixo",pavimentacao,1
+"Pista com vários buracos perto da saída da escola municipal",pavimentacao,1
+"A rua tá parecendo queijo suíço de tanto buraco",pavimentacao,0
+"Precisa recapear a avenida, o asfalto tá todo ondulado",pavimentacao,0
+"Afundamento no asfalto bem na faixa de pedestre",pavimentacao,0
+"Buraco fundo na frente do meu portão, não consigo tirar o carro da garagem",pavimentacao,0
+"O pavimento cedeu e ficou um degrau no meio da rua",pavimentacao,0
+"Buraco na rua",pavimentacao,0
+"Poste da esquina tá apagado faz 2 semanas, a rua fica um breu",iluminacao,0
+"A luz do poste em frente ao 45 queimou",iluminacao,0
+"Praça sem iluminação nenhuma, virou ponto de assalto",iluminacao,0
+"Lâmpada pisca a noite inteira e não deixa ninguém dormir",iluminacao,0
+"Tem poste com fio exposto soltando faísca na calçada",iluminacao,1
+"As luminárias da passarela estão todas apagadas",iluminacao,0
+"Rua escura demais, as luzes não acendem desde o temporal",iluminacao,0
+"O poste fica aceso durante o dia todo, desperdício",iluminacao,0
+"Ponto de ônibus sem luz nenhuma, as mulheres têm medo de esperar ali",iluminacao,0
+"Lâmpada queimada no poste 3 da viela",iluminacao,0
+"Deixaram um monte de entulho de reforma na calçada",limpeza,0
+"O caminhão do lixo não passa aqui há uma semana",limpeza,0
+"Largaram um colchão e um guarda-roupa velho na esquina",limpeza,0
+"Tem um cachorro morto na beira da rua desde ontem",limpeza,0
+"Terreno baldio cheio de lixo, já apareceu escorpião",limpeza,0
+"Sacos de lixo rasgados espalhados pela calçada toda",limpeza,0
+"Pessoal de obra despeja restos de construção na praça à noite",limpeza,0
+"Mau cheiro forte de lixo acumulado na frente da creche",limpeza,1
+"Papeleira da praça transbordando e lixo voando",limpeza,0
+"Pneu velho e lixo jogado no canteiro",limpeza,0
+"Toda vez que chove a rua enche e a água entra nas casas",drenagem,1
+"Bueiro entupido de folhas na esquina",drenagem,0
+"A boca de lobo tá sem grade, uma criança pode cair",drenagem,1
+"Água empoçada há dias por causa do ralo da rua entupido",drenagem,0
+"O córrego tá assoreado e transborda com qualquer chuva",drenagem,1
+"Sarjeta cheia de areia e a água não corre",drenagem,0
+"Tampa do bueiro quebrada no meio da pista",drenagem,1
+"Enxurrada forte desce a rua e alaga a avenida lá embaixo",drenagem,0
+"Galeria de água da chuva entupida, cheiro de esgoto",drenagem,0
+"Ralo da rua todo tampado de lixo",drenagem,0
+"Árvore enorme inclinada em cima da casa da vizinha, se ventar cai",arvores,1
+"Precisa podar os galhos que estão batendo nos fios",arvores,0
+"Caiu uma árvore e bloqueou a rua inteira",arvores,1
+"Galho seco grande pendurado em cima do ponto de ônibus",arvores,1
+"A raiz da árvore estourou a calçada toda",arvores,0
+"Árvore morta com cupim na frente da escola",arvores,1
+"Galhada cobrindo a placa de pare",arvores,0
+"Solicito poda da árvore em frente ao número 300",arvores,0
+"Tronco rachado depois do vendaval",arvores,0
+"Árvore muito grande tampando a iluminação do poste",arvores,0
+"Vizinho faz churrasco com som alto todo domingo",fora_escopo,0
+"Quero saber o horário do posto de saúde",fora_escopo,0
+"Semáforo do cruzamento está desligado",fora_escopo,1
+"Carro abandonado há meses na rua",fora_escopo,0
+"Pedido de vaga em creche para meu filho",fora_escopo,0
+"Cachorro latindo a noite toda no quintal ao lado",fora_escopo,0
+"Ônibus da linha 857 está atrasando muito",fora_escopo,0
+"Gostaria de elogiar o atendimento da subprefeitura",fora_escopo,0

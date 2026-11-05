@@ -1,0 +1,8 @@
+id_solicitacao;data_hora;canal;nome;bairro;endereco;latitude;longitude;descricao
+TOT-0001;2026-11-03 09:00;totem;Elisa Modelo;Brasilândia;Rua da Mooca, 2247;-23.46778;-46.69646;Calçada toda quebrada e cheia de buraco na Rua do Comércio
+TOT-0002;2031-01-01 10:00;totem;Joao Inventado;Sé;Estrada do M'Boi Mirim, 1519;-23.55649;-46.6342;Rua escura, a iluminação pública não funciona desde o mês passado
+TOT-0003;2026-11-03 09:00;totem;Carla Exemplo;Mooca;Rua Domingos de Morais, 2166;-23.55096;-46.59186;Caçamba de entulho largada há dias ocupando a rua
+TOT-0004;2026-11-03 09:00;totem;Heitor Fake;Capão Redondo;Rua Voluntários da Pátria, 330;-23.67163;-46.77724;Córrego transbordando quando chove e a água entra nas casas
+TOT-0005;2026-11-03 09:00;totem;Heitor Fake;Itaquera;Rua Cardeal Arcoverde, 329;-23.53705;-46.45537;Raiz da árvore levantou toda a calçada, cadeirante não consegue passar
+TOT-0006;2026-11-03 09:00;totem;Elisa Modelo;Cidade Tiradentes;Av. Itaquera, 226;-23.57554;-46.40844;Preciso de poda, os galhos estão encostando na fiação
+TOT-0007;2026-11-03 09:00;totem;Heitor Fake;Sé;Estrada do M'Boi Mirim, 2109;-23.5438;-46.63272;oi
