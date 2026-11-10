@@ -1,5 +1,5 @@
 {
-  "inicio": "2026-11-10T19:13:14",
+  "inicio": "2026-11-10T20:04:13",
   "arquivos": [
     {
       "arquivo": "app156_2026-11-03.csv",
@@ -162,7 +162,7 @@
       "prazo_dias": 2,
       "justificativa": "categoria pavimentacao (peso 2); RISCO: risco de queda ou acidente",
       "protocolo": "ZEL-2026-000001",
-      "registrado_em": "2026-11-10T19:13:25",
+      "registrado_em": "2026-11-10T20:04:28",
       "mensagem_cidadao": "Olá! Sua solicitação APP-0001 sobre buraco/asfalto no bairro Brasilândia foi registrada com o protocolo ZEL-2026-000001. Prioridade ALTA, encaminhada para Subprefeitura - Conservação de Vias. Prazo estimado: 2 dias."
     },
     {
@@ -189,7 +189,7 @@
       "prazo_dias": 7,
       "justificativa": "categoria iluminacao (peso 2); problema antigo ou reincidente (+1)",
       "protocolo": "ZEL-2026-000002",
-      "registrado_em": "2026-11-10T19:13:26",
+      "registrado_em": "2026-11-10T20:04:29",
       "mensagem_cidadao": "Olá! Sua solicitação APP-0002 sobre iluminação pública no bairro Brasilândia foi registrada com o protocolo ZEL-2026-000002. Prioridade MÉDIA, encaminhada para Departamento de Iluminação Pública. Prazo estimado: 7 dias."
     },
     {
@@ -216,7 +216,7 @@
       "prazo_dias": 15,
       "justificativa": "categoria limpeza (peso 1)",
       "protocolo": "ZEL-2026-000003",
-      "registrado_em": "2026-11-10T19:13:26",
+      "registrado_em": "2026-11-10T20:04:30",
       "mensagem_cidadao": "Olá! Sua solicitação APP-0003 sobre lixo/entulho no bairro Capão Redondo foi registrada com o protocolo ZEL-2026-000003. Prioridade BAIXA, encaminhada para Limpeza Urbana. Prazo estimado: 15 dias."
     },
     {
@@ -243,7 +243,7 @@
       "prazo_dias": 7,
       "justificativa": "categoria drenagem (peso 2); chuva prevista baixa: 0.8 mm em 24h",
       "protocolo": "ZEL-2026-000004",
-      "registrado_em": "2026-11-10T19:13:27",
+      "registrado_em": "2026-11-10T20:04:30",
       "mensagem_cidadao": "Olá! Sua solicitação APP-0004 sobre bueiro/alagamento no bairro Santana foi registrada com o protocolo ZEL-2026-000004. Prioridade MÉDIA, encaminhada para Subprefeitura - Drenagem. Prazo estimado: 7 dias."
     },
     {
@@ -270,7 +270,7 @@
       "prazo_dias": 2,
       "justificativa": "categoria arvores (peso 2); RISCO: pessoas vulneráveis por perto, risco de queda ou acidente; chuva prevista baixa: 0.4 mm em 24h",
       "protocolo": "ZEL-2026-000005",
-      "registrado_em": "2026-11-10T19:13:28",
+      "registrado_em": "2026-11-10T20:04:31",
       "mensagem_cidadao": "Olá! Sua solicitação APP-0005 sobre árvores no bairro Pinheiros foi registrada com o protocolo ZEL-2026-000005. Prioridade ALTA, encaminhada para Subprefeitura - Manejo de Árvores. Prazo estimado: 2 dias."
     },
     {
@@ -297,7 +297,7 @@
       "prazo_dias": 7,
       "justificativa": "categoria pavimentacao (peso 2)",
       "protocolo": "ZEL-2026-000006",
-      "registrado_em": "2026-11-10T19:13:28",
+      "registrado_em": "2026-11-10T20:04:32",
       "mensagem_cidadao": "Olá! Sua solicitação APP-0006 sobre buraco/asfalto no bairro Santana foi registrada com o protocolo ZEL-2026-000006. Prioridade MÉDIA, encaminhada para Subprefeitura - Conservação de Vias. Prazo estimado: 7 dias."
     },
     {
@@ -324,7 +324,7 @@
       "prazo_dias": 7,
       "justificativa": "categoria iluminacao (peso 2)",
       "protocolo": "ZEL-2026-000007",
-      "registrado_em": "2026-11-10T19:13:29",
+      "registrado_em": "2026-11-10T20:04:32",
       "mensagem_cidadao": "Olá! Sua solicitação APP-0007 sobre iluminação pública no bairro Pinheiros foi registrada com o protocolo ZEL-2026-000007. Prioridade MÉDIA, encaminhada para Departamento de Iluminação Pública. Prazo estimado: 7 dias."
     },
     {
@@ -351,7 +351,7 @@
       "prazo_dias": 2,
       "justificativa": "categoria arvores (peso 2); RISCO: pessoas vulneráveis por perto, risco de queda ou acidente; chuva prevista baixa: 0.2 mm em 24h",
       "protocolo": "ZEL-2026-000008",
-      "registrado_em": "2026-11-10T19:13:29",
+      "registrado_em": "2026-11-10T20:04:33",
       "mensagem_cidadao": "Olá! Sua solicitação APP-0008 sobre árvores no bairro Butantã foi registrada com o protocolo ZEL-2026-000008. Prioridade ALTA, encaminhada para Subprefeitura - Manejo de Árvores. Prazo estimado: 2 dias."
     },
     {
@@ -378,7 +378,7 @@
       "prazo_dias": 7,
       "justificativa": "categoria limpeza (peso 1); problema antigo ou reincidente (+1)",
       "protocolo": "ZEL-2026-000009",
-      "registrado_em": "2026-11-10T19:13:30",
+      "registrado_em": "2026-11-10T20:04:34",
       "mensagem_cidadao": "Olá! Sua solicitação APP-0009 sobre lixo/entulho no bairro Jabaquara foi registrada com o protocolo ZEL-2026-000009. Prioridade MÉDIA, encaminhada para Limpeza Urbana. Prazo estimado: 7 dias."
     },
     {
@@ -405,7 +405,7 @@
       "prazo_dias": 2,
       "justificativa": "categoria drenagem (peso 2); RISCO: pessoas vulneráveis por perto, risco de queda ou acidente, buraco sem proteção; chuva prevista baixa: 0.2 mm em 24h",
       "protocolo": "ZEL-2026-000010",
-      "registrado_em": "2026-11-10T19:13:30",
+      "registrado_em": "2026-11-10T20:04:35",
       "mensagem_cidadao": "Olá! Sua solicitação APP-0010 sobre bueiro/alagamento no bairro Butantã foi registrada com o protocolo ZEL-2026-000010. Prioridade ALTA, encaminhada para Subprefeitura - Drenagem. Prazo estimado: 2 dias."
     },
     {
@@ -432,7 +432,7 @@
       "prazo_dias": 7,
       "justificativa": "categoria limpeza (peso 1); problema antigo ou reincidente (+1)",
       "protocolo": "ZEL-2026-000011",
-      "registrado_em": "2026-11-10T19:13:31",
+      "registrado_em": "2026-11-10T20:04:35",
       "mensagem_cidadao": "Olá! Sua solicitação WEB-0003 sobre lixo/entulho no bairro Pinheiros foi registrada com o protocolo ZEL-2026-000011. Prioridade MÉDIA, encaminhada para Limpeza Urbana. Prazo estimado: 7 dias."
     },
     {
@@ -459,7 +459,7 @@
       "prazo_dias": 7,
       "justificativa": "categoria drenagem (peso 2); chuva prevista baixa: 0.6 mm em 24h",
       "protocolo": "ZEL-2026-000012",
-      "registrado_em": "2026-11-10T19:13:31",
+      "registrado_em": "2026-11-10T20:04:36",
       "mensagem_cidadao": "Olá! Sua solicitação WEB-0004 sobre bueiro/alagamento no bairro Mooca foi registrada com o protocolo ZEL-2026-000012. Prioridade MÉDIA, encaminhada para Subprefeitura - Drenagem. Prazo estimado: 7 dias."
     },
     {
@@ -486,7 +486,7 @@
       "prazo_dias": 2,
       "justificativa": "categoria arvores (peso 2); RISCO: pessoas vulneráveis por perto; chuva prevista baixa: 1.2 mm em 24h",
       "protocolo": "ZEL-2026-000013",
-      "registrado_em": "2026-11-10T19:13:32",
+      "registrado_em": "2026-11-10T20:04:36",
       "mensagem_cidadao": "Olá! Sua solicitação WEB-0005 sobre árvores no bairro Brasilândia foi registrada com o protocolo ZEL-2026-000013. Prioridade ALTA, encaminhada para Subprefeitura - Manejo de Árvores. Prazo estimado: 2 dias."
     },
     {
@@ -513,7 +513,7 @@
       "prazo_dias": 2,
       "justificativa": "categoria pavimentacao (peso 2); RISCO: risco de queda ou acidente",
       "protocolo": "ZEL-2026-000014",
-      "registrado_em": "2026-11-10T19:13:32",
+      "registrado_em": "2026-11-10T20:04:37",
       "mensagem_cidadao": "Olá! Sua solicitação SUB-0001 sobre buraco/asfalto no bairro Santana foi registrada com o protocolo ZEL-2026-000014. Prioridade ALTA, encaminhada para Subprefeitura - Conservação de Vias. Prazo estimado: 2 dias."
     },
     {
@@ -540,7 +540,7 @@
       "prazo_dias": 7,
       "justificativa": "categoria iluminacao (peso 2)",
       "protocolo": "ZEL-2026-000015",
-      "registrado_em": "2026-11-10T19:13:33",
+      "registrado_em": "2026-11-10T20:04:38",
       "mensagem_cidadao": "Olá! Sua solicitação SUB-0002 sobre iluminação pública no bairro Cidade Tiradentes foi registrada com o protocolo ZEL-2026-000015. Prioridade MÉDIA, encaminhada para Departamento de Iluminação Pública. Prazo estimado: 7 dias."
     },
     {
@@ -567,7 +567,7 @@
       "prazo_dias": 15,
       "justificativa": "categoria limpeza (peso 1)",
       "protocolo": "ZEL-2026-000016",
-      "registrado_em": "2026-11-10T19:13:33",
+      "registrado_em": "2026-11-10T20:04:38",
       "mensagem_cidadao": "Olá! Sua solicitação SUB-0003 sobre lixo/entulho no bairro Cidade Tiradentes foi registrada com o protocolo ZEL-2026-000016. Prioridade BAIXA, encaminhada para Limpeza Urbana. Prazo estimado: 15 dias."
     },
     {
@@ -594,7 +594,7 @@
       "prazo_dias": 7,
       "justificativa": "categoria drenagem (peso 2); chuva prevista baixa: 0.7 mm em 24h",
       "protocolo": "ZEL-2026-000017",
-      "registrado_em": "2026-11-10T19:13:34",
+      "registrado_em": "2026-11-10T20:04:39",
       "mensagem_cidadao": "Olá! Sua solicitação SUB-0004 sobre bueiro/alagamento no bairro Cidade Tiradentes foi registrada com o protocolo ZEL-2026-000017. Prioridade MÉDIA, encaminhada para Subprefeitura - Drenagem. Prazo estimado: 7 dias."
     },
     {
@@ -621,7 +621,7 @@
       "prazo_dias": 2,
       "justificativa": "categoria arvores (peso 2); RISCO: risco de queda ou acidente; chuva prevista baixa: 0.3 mm em 24h",
       "protocolo": "ZEL-2026-000018",
-      "registrado_em": "2026-11-10T19:13:34",
+      "registrado_em": "2026-11-10T20:04:40",
       "mensagem_cidadao": "Olá! Sua solicitação SUB-0005 sobre árvores no bairro Capão Redondo foi registrada com o protocolo ZEL-2026-000018. Prioridade ALTA, encaminhada para Subprefeitura - Manejo de Árvores. Prazo estimado: 2 dias."
     },
     {
@@ -648,7 +648,7 @@
       "prazo_dias": 7,
       "justificativa": "categoria pavimentacao (peso 2)",
       "protocolo": "ZEL-2026-000019",
-      "registrado_em": "2026-11-10T19:13:35",
+      "registrado_em": "2026-11-10T20:04:40",
       "mensagem_cidadao": "Olá! Sua solicitação TOT-0001 sobre buraco/asfalto no bairro Brasilândia foi registrada com o protocolo ZEL-2026-000019. Prioridade MÉDIA, encaminhada para Subprefeitura - Conservação de Vias. Prazo estimado: 7 dias."
     },
     {
@@ -675,7 +675,7 @@
       "prazo_dias": 7,
       "justificativa": "categoria limpeza (peso 1); problema antigo ou reincidente (+1)",
       "protocolo": "ZEL-2026-000020",
-      "registrado_em": "2026-11-10T19:13:35",
+      "registrado_em": "2026-11-10T20:04:41",
       "mensagem_cidadao": "Olá! Sua solicitação TOT-0003 sobre lixo/entulho no bairro Mooca foi registrada com o protocolo ZEL-2026-000020. Prioridade MÉDIA, encaminhada para Limpeza Urbana. Prazo estimado: 7 dias."
     },
     {
@@ -702,7 +702,7 @@
       "prazo_dias": 2,
       "justificativa": "categoria drenagem (peso 2); RISCO: água invadindo casas; chuva prevista baixa: 0.3 mm em 24h",
       "protocolo": "ZEL-2026-000021",
-      "registrado_em": "2026-11-10T19:13:36",
+      "registrado_em": "2026-11-10T20:04:42",
       "mensagem_cidadao": "Olá! Sua solicitação TOT-0004 sobre bueiro/alagamento no bairro Capão Redondo foi registrada com o protocolo ZEL-2026-000021. Prioridade ALTA, encaminhada para Subprefeitura - Drenagem. Prazo estimado: 2 dias."
     },
     {
@@ -729,7 +729,7 @@
       "prazo_dias": 2,
       "justificativa": "categoria arvores (peso 2); RISCO: pessoas vulneráveis por perto; chuva prevista baixa: 1.2 mm em 24h",
       "protocolo": "ZEL-2026-000022",
-      "registrado_em": "2026-11-10T19:13:36",
+      "registrado_em": "2026-11-10T20:04:42",
       "mensagem_cidadao": "Olá! Sua solicitação TOT-0005 sobre árvores no bairro Itaquera foi registrada com o protocolo ZEL-2026-000022. Prioridade ALTA, encaminhada para Subprefeitura - Manejo de Árvores. Prazo estimado: 2 dias."
     },
     {
@@ -756,7 +756,7 @@
       "prazo_dias": 7,
       "justificativa": "categoria arvores (peso 2); chuva prevista baixa: 0.7 mm em 24h",
       "protocolo": "ZEL-2026-000023",
-      "registrado_em": "2026-11-10T19:13:37",
+      "registrado_em": "2026-11-10T20:04:43",
       "mensagem_cidadao": "Olá! Sua solicitação TOT-0006 sobre árvores no bairro Cidade Tiradentes foi registrada com o protocolo ZEL-2026-000023. Prioridade MÉDIA, encaminhada para Subprefeitura - Manejo de Árvores. Prazo estimado: 7 dias."
     }
   ],
@@ -767,8 +767,8 @@
       "motivo": "JSONDecodeError: Unterminated string starting at: line 1 column 46 (char 45)"
     }
   ],
-  "duracao_s": 25.2,
+  "duracao_s": 32.9,
   "memoria_mb": 170.4,
-  "cpu_percent_medio": 17.4,
+  "cpu_percent_medio": 17.0,
   "pendentes_na_fila": 0
 }

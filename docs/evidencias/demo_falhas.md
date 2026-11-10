@@ -1,6 +1,6 @@
 # Demonstração de falhas tratadas
 
-Gerado automaticamente por `python main.py falhas` em 10/11/2026 19:13.
+Gerado automaticamente por `python main.py falhas` em 10/11/2026 20:03.
 
 | Cenário | Falha simulada | Esperado | Obtido | Passou? |
 | :- | :- | :- | :- | :-: |

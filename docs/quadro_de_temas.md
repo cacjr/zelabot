@@ -9,7 +9,8 @@ Seis temas da disciplina, cada um com função real no fluxo. O critério de esc
 | **Onde** | T6, [src/rpa_portal.py](../src/rpa_portal.py) |
 | **O que resolve** | Substitui a digitação manual: login no portal, preenchimento do formulário, registro e leitura do protocolo. |
 | **Por que** | Sistemas públicos antigos raramente têm API; automatizar pela interface é o caso clássico de RPA. |
-| **Detalhes** | Esperas explícitas (`WebDriverWait`) em vez de `sleep`; retry em erro 503; print da tela em falhas; navegador sempre fechado (context manager); senha errada não gera tentativas repetidas de login. |
+| **Detalhes** | Esperas explícitas (`WebDriverWait`) em vez de `sleep`; retry em erro 503; print da tela em falhas; Edge como alternativa se o Chrome não abrir; navegador sempre fechado (context manager); senha errada não gera tentativas repetidas de login. |
+| **Portal simulado** | Automatizar um sistema público real com dados sintéticos geraria protocolos falsos. O portal local reproduz login, formulário e protocolo, e pode simular instabilidade (erro 503). |
 
 ## Tema 2: Arquivos e I/O
 
@@ -60,7 +61,8 @@ Logs no console e em `saida/logs/`, no formato `hora | nível | módulo | mensag
 | **Onde** | T4 (classificação) e T8 (pontos críticos), [src/modelo.py](../src/modelo.py) |
 | **O que resolve** | Interpreta o texto livre ("a rua tá parecendo queijo suíço", "bueiero") e informa categoria e confiança. |
 | **Como** | TF-IDF de palavras e de trechos de caracteres (tolera erros de digitação) com Regressão Logística. Base desbalanceada de propósito (160 exemplos de pavimentação, 60 de árvores), tratada com `class_weight="balanced"`. |
-| **Limiar** | Abaixo de 55% de confiança, a decisão vai para revisão humana. |
+| **Limiar** | Abaixo de 55% de confiança, a decisão vai para revisão humana. O valor sai de uma regra fixa, validada com validação cruzada aninhada. |
+| **Integração** | `MODELO_EXTERNO` no `.env` permite usar um modelo treinado em outra disciplina; se for inválido, o robô volta ao próprio. |
 | **KMeans** | Agrupa solicitações por localização e indica pontos críticos com link para o mapa. |
 | **Por que não XGBoost** | Base pequena e textual; a Regressão Logística treina em menos de 1 s e permite ver o peso de cada palavra. |
 | **Por que não LLM** | Opcional no enunciado. O modelo próprio roda offline, sem custo, não envia texto do cidadão a terceiros e é reproduzível. |

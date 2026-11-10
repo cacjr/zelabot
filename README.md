@@ -37,7 +37,7 @@ flowchart LR
     G -. portal fora do ar .-> P[(Pendentes)]
 ```
 
-As linhas pontilhadas são os caminhos seguros: cada falha vai para uma fila própria, com o motivo registrado, e o restante segue. O sistema da prefeitura é um portal web simulado (`portal/`), com login e formulário, que sobe junto com o robô.
+As linhas pontilhadas são os caminhos seguros: cada falha vai para uma fila própria, com o motivo registrado, e o restante segue. O sistema da prefeitura é um portal web simulado (`portal/`), com login e formulário, que sobe junto com o robô. Automatizar um sistema público real com dados sintéticos geraria protocolos falsos, por isso o portal é simulado.
 
 ## Quadro de temas
 
@@ -45,7 +45,7 @@ Detalhamento e temas descartados em [docs/quadro_de_temas.md](docs/quadro_de_tem
 
 | Tema | Onde no fluxo | O que resolve | Por que escolhemos |
 | :- | :- | :- | :- |
-| **1. Automação web com Selenium** | T6, [src/rpa_portal.py](src/rpa_portal.py) | Faz login no portal e cadastra cada solicitação, com espera explícita, retry e print da tela em caso de erro. | Sistemas públicos antigos raramente têm API. Selenium localiza os campos pela página, sem depender de coordenadas da tela como o PyAutoGUI. |
+| **1. Automação web com Selenium** | T6, [src/rpa_portal.py](src/rpa_portal.py) | Faz login no portal e cadastra cada solicitação, com espera explícita, retry e print da tela em caso de erro. Usa o Edge se o Chrome não abrir. | Sistemas públicos antigos raramente têm API. Selenium localiza os campos pela página, sem depender de coordenadas da tela como o PyAutoGUI. |
 | **2. Arquivos e I/O** (encoding, chunking, modos de abertura, watchdog) | T1, [src/leitura.py](src/leitura.py) e modo `vigiar` | Lê CSV em UTF-8 e em CP1252, Excel e JSON; arquivo corrompido vai para quarentena; o modo vigia processa cada arquivo novo sozinho. | Cada canal grava num formato e encoding diferente. Sem esse tratamento, "Calçada" vira "CalÃ§ada" ou a leitura quebra. |
 | **3. Automação de Excel** (pandas + calamine, XlsxWriter) | T1 e T9, [src/relatorio.py](src/relatorio.py) | Lê a planilha da subprefeitura e gera o relatório da equipe, com abas por situação, cores por prioridade, filtros e gráfico. | A prefeitura trabalha com Excel. Calamine lê rápido e XlsxWriter permite formatação e gráficos. |
 | **4. Tratamento de erros e logs** | Todo o fluxo, [src/resiliencia.py](src/resiliencia.py) | Timeout, retry com espera exponencial, disjuntor, pendentes, quarentena, idempotência e log de cada tarefa. | API, portal e arquivos falham na prática; cada falha previsível precisa de um caminho seguro. |
@@ -56,7 +56,7 @@ Detalhamento e temas descartados em [docs/quadro_de_temas.md](docs/quadro_de_tem
 
 ## Como executar
 
-Requisitos: Python 3.10+ e Google Chrome. Na primeira execução o Selenium baixa o driver do Chrome (requer internet).
+Requisitos: Python 3.11+ (testado no 3.13) e Google Chrome ou Microsoft Edge. Na primeira execução o Selenium baixa o driver do navegador (requer internet).
 
 ```bash
 python -m venv .venv
@@ -73,14 +73,14 @@ pip install -r requirements.txt
 ```
 
 ```bash
-copy .env.example .env
+python main.py verificar
 ```
-
-No Linux/Mac: `cp .env.example .env`.
 
 ```bash
 python main.py
 ```
+
+O `verificar` confere Python, bibliotecas, `.env`, internet e navegador. Se o `.env` não existir, ele é criado a partir do `.env.example`.
 
 Resultado esperado ao final do log:
 
@@ -90,6 +90,7 @@ FIM: 31 lidos | 23 registradas | 4 revisao humana | 3 rejeitadas | 0 pendentes |
 
 | Comando | Função |
 | :- | :- |
+| `python main.py verificar` | Diagnóstico do ambiente |
 | `python main.py` | Execução completa |
 | `python main.py vigiar` | Processa automaticamente cada arquivo novo em `entrada/` |
 | `python main.py avaliar` | Métricas no teste rotulado e no lote de entrada com gabarito |
@@ -97,7 +98,7 @@ FIM: 31 lidos | 23 registradas | 4 revisao humana | 3 rejeitadas | 0 pendentes |
 | `python main.py reset` | Apaga estado e saídas para rodar do zero |
 | `python -m pytest` | 20 testes automatizados |
 
-Ao rodar de novo sem `reset`, o robô mostra `0 registradas`: é a idempotência, que impede cadastro em dobro. Se o Chrome não abrir, as solicitações ficam em pendentes e são registradas na execução seguinte.
+Ao rodar de novo sem `reset`, o robô mostra `0 registradas`: é a idempotência, que impede cadastro em dobro. Se nenhum navegador abrir, as solicitações ficam em pendentes e são registradas na execução seguinte.
 
 ## Configuração (.env)
 
@@ -110,8 +111,10 @@ Nenhuma senha fica no código. O `.env` está no `.gitignore`; o modelo é o [.e
 | `CLIMA_API_URL` | API pública Open-Meteo, gratuita e sem chave |
 | `LIMIAR_CONFIANCA` | Abaixo dele, a decisão vai para revisão humana (padrão 0,55) |
 | `TIMEOUT_SEGUNDOS`, `MAX_TENTATIVAS`, `ESPERA_INICIAL` | Timeout e retry |
+| `NAVEGADOR` | `auto` (Chrome, depois Edge), `chrome` ou `edge` |
+| `NAVEGADOR_VISIVEL` | `1` mostra o navegador preenchendo o portal |
 | `CHROMEDRIVER_PATH` | Opcional: driver já instalado, para máquinas sem internet |
-| `NAVEGADOR_VISIVEL` | `1` mostra o Chrome preenchendo o portal |
+| `MODELO_EXTERNO` | Opcional: modelo scikit-learn de outra disciplina (`.joblib` com `predict_proba` e as mesmas categorias); se for inválido, o robô usa o próprio |
 
 ## Saídas
 
@@ -123,7 +126,8 @@ Detalhes em [docs/evidencias_validacao.md](docs/evidencias_validacao.md).
 
 - **Ponta a ponta:** 31 registros em 5 arquivos geram 23 registros no portal, 4 revisões humanas, 3 rejeições com motivo, 1 duplicata ignorada e 1 arquivo em quarentena.
 - **Lote de entrada com gabarito:** 23/23 automatizadas na categoria certa (IC 95%: 85,7% a 100%), 3/3 rejeições corretas, 2/2 casos fora do escopo em revisão, 0 erros silenciosos.
-- **Teste rotulado (59 frases):** 86,3% de acurácia (IC 95%: 74,3% a 93,2%) contra 70,6% da regra por palavra-chave. Com o limiar, o robô automatiza 71% e acerta 92,9% do que automatiza.
+- **Teste rotulado (59 frases):** 86,3% de acurácia (IC 95%: 74,3% a 93,2%) contra 70,6% da regra por palavra-chave.
+- **Limiar sem viés de seleção (validação cruzada aninhada):** o robô automatiza 69,5% e acerta 95,1% do que automatiza (IC 95%: 83,9% a 98,7%).
 - **Falhas:** 9 de 9 cenários tratados ([docs/evidencias/demo_falhas.md](docs/evidencias/demo_falhas.md)).
 
 ## Proteção de dados, ética e ODS
@@ -133,7 +137,7 @@ Os dados são sintéticos, mas o robô trata como reais: o nome vira pseudônimo
 ## Limites
 
 - Base de treino sintética e amostras pequenas; os intervalos de confiança são largos.
-- O limiar de 0,55 foi escolhido no próprio conjunto de teste; o desempenho real tende a ser um pouco menor.
+- Teste e gabarito foram rotulados pela mesma equipe que construiu o modelo; um rotulador independente reduziria esse viés.
 - Pontos críticos do KMeans não foram validados contra vistorias.
 - Portal simulado: num sistema real, os seletores do Selenium precisariam de ajuste.
 

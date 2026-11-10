@@ -28,7 +28,7 @@ Todos os resultados são reproduzíveis pelos comandos indicados. Arquivos de ap
 | Quarentena | 1 |
 | Pendentes | 0 |
 | Dados pessoais mascarados | 2 (telefone, CPF) |
-| Tempo | 25,2 s |
+| Tempo | 32,9 s |
 
 **Comparação com gabarito.** Os 30 registros únicos foram rotulados em [gabarito_entrada.csv](../dados/teste/gabarito_entrada.csv) com a decisão esperada, a categoria e a urgência. O `python main.py avaliar` compara automaticamente ([detalhe por registro](evidencias/avaliacao_lote_entrada.csv)):
 
@@ -85,7 +85,18 @@ Erro silencioso é quando o robô decide sozinho e erra, o pior caso, porque nin
 | 0,65 | 64,4% | 100% | 0 | 8/8 |
 | 0,70 | 55,9% | 100% | 0 | 8/8 |
 
-Com 0,55 os erros silenciosos caem de 7 para 3 e 7 de 8 pedidos fora do escopo são retidos, mantendo 7 em cada 10 casos automatizados (IC 95% do acerto: 81,0% a 97,5%). Subir para 0,65 zera os erros, mas envia mais 6 acertos à fila humana.
+**Regra de escolha:** o limiar com maior acerto no automatizado, mantendo pelo menos 65% de automação. Com todos os dados, a regra escolhe 0,55: os erros silenciosos caem de 7 para 3 e 7 de 8 pedidos fora do escopo são retidos. Subir para 0,65 zera os erros, mas derruba a automação para 64%.
+
+**Estimativa sem viés de seleção.** Escolher o limiar e medir o resultado nos mesmos dados infla o número. Por isso o teste foi dividido em 5 partes: em cada rodada, a regra escolhe o limiar em 4 partes e o resultado é medido só na parte que ficou de fora.
+
+| Validação cruzada aninhada | Resultado |
+| :- | :- |
+| Limiar escolhido em cada rodada | 0,55; 0,55; 0,65; 0,55; 0,65 |
+| Automatizadas | 69,5% |
+| Acerto no automatizado | **95,1%** (IC 95%: 83,9% a 98,7%) |
+| Erros silenciosos | 2 |
+
+A estimativa honesta fica no mesmo patamar da medição direta (92,9%), o que indica que o 0,55 não foi um ajuste de sorte.
 
 ### 2.3 Regra de urgência
 
@@ -129,9 +140,9 @@ Na urgência, a regra perdeu "galhos encostando na fiação" (procura "fio solto
 ## 5. Limites
 
 1. **Amostras pequenas** (59 frases de teste, 30 registros de entrada): os intervalos de confiança são largos.
-2. **Limiar escolhido no teste:** o ideal é um conjunto de validação separado.
+2. **Rotulagem pela mesma equipe:** teste e gabarito foram rotulados por quem construiu o modelo; um rotulador independente reduziria esse viés.
 3. **Treino sintético:** F1 de 1,00 no treino contra 0,86 no teste.
 4. **Sem classe "fora do escopo":** o modelo depende do limiar para não decidir.
 5. **Regras de urgência por palavra-chave:** explicáveis, mas limitadas.
 6. **Critério de chuva** não foi acionado na execução real (previsão de 0 a 0,2 mm); está coberto por teste automatizado com 25 mm.
-7. **Portal simulado:** seletores e tempos mudariam num sistema real.
+7. **Portal simulado:** seletores e tempos mudariam num sistema real. A execução completa foi validada com Chrome e com Edge, e num clone limpo do repositório.

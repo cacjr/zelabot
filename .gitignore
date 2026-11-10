@@ -12,3 +12,6 @@ saida/
 estado/
 modelos/*.joblib
 portal/dados_portal.json
+
+# material de estudo interno do grupo
+ESTUDO_GRUPO.md
