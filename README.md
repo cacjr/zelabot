@@ -8,9 +8,9 @@ O ZelaBot é um robô que recebe as reclamações de zeladoria dos moradores (bu
 
 | Nome | RM |
 | :- | :- |
-| (preencher) | (preencher) |
-| (preencher) | (preencher) |
-| (preencher) | (preencher) |
+| Claudio Alves | RM568565 |
+| Gustavo Duarte | RM567066 |
+| Leonardo Pereira | RM567836 |
 
 ## O problema
 
