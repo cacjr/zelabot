@@ -15,6 +15,7 @@ Orquestrador: o PROCESSO do robo, dividido em TAREFAS ligadas por RELACOES
 Os parenteses sao os CAMINHOS SEGUROS: o que o robo nao resolve vai para uma
 fila especifica com o motivo, e o resto continua.
 """
+import hashlib
 import time
 from datetime import datetime
 from pathlib import Path
@@ -32,6 +33,13 @@ log = obter_logger("pipeline")
 
 NOME_CATEGORIA = {"pavimentacao": "buraco/asfalto", "iluminacao": "iluminação pública",
                   "limpeza": "lixo/entulho", "drenagem": "bueiro/alagamento", "arvores": "árvores"}
+
+
+def assinatura_registro(r: dict) -> str:
+    """Resumo do conteudo da solicitacao: muda se o cidadao corrigir algum dado."""
+    campos = ("descricao", "data_hora", "bairro", "latitude", "longitude")
+    texto = "|".join(str(r.get(c) or "").strip() for c in campos)
+    return hashlib.sha256(texto.encode("utf-8")).hexdigest()[:16]
 
 
 def mensagem_cidadao(s: dict, status: str) -> str:
@@ -60,7 +68,8 @@ def executar(arquivos: list[Path] | None = None, usar_portal: bool = True) -> di
     em_quarentena = RegistroJSON("quarentena")  # hash dos arquivos ja barrados
 
     resumo = {"inicio": datetime.now().isoformat(timespec="seconds"), "arquivos": [],
-              "lidos": 0, "duplicadas_no_lote": 0, "ja_processadas": 0, "rejeitadas": [],
+              "lidos": 0, "duplicadas_no_lote": 0, "ja_processadas": 0, "reenviadas_corrigidas": 0,
+              "rejeitadas": [],
               "revisao_humana": [], "registradas": [], "pendentes": [], "quarentena": []}
 
     # T1 Ler arquivos
@@ -95,7 +104,13 @@ def executar(arquivos: list[Path] | None = None, usar_portal: bool = True) -> di
         if rid and rid in vistos:
             resumo["duplicadas_no_lote"] += 1
             continue
-        if rid and (rid in processados or rid in pendentes):
+        anterior = processados.get(rid) if rid else None
+        if (anterior and anterior.get("status") == "rejeitada"
+                and anterior.get("assinatura") != assinatura_registro(r)):
+            # foi rejeitada antes, mas o cidadao reenviou com os dados corrigidos
+            log.info("T2 %s foi rejeitada antes e voltou corrigida: sera processada de novo", rid)
+            resumo["reenviadas_corrigidas"] += 1
+        elif rid and (rid in processados or rid in pendentes):
             resumo["ja_processadas"] += 1
             continue
         vistos.add(rid)
@@ -114,7 +129,9 @@ def executar(arquivos: list[Path] | None = None, usar_portal: bool = True) -> di
             rej["mensagem_cidadao"] = mensagem_cidadao(rej, "rejeitada")
             resumo["rejeitadas"].append(rej)
             if r.get("id_solicitacao"):
-                processados.definir(str(r["id_solicitacao"]), {"status": "rejeitada", "quando": resumo["inicio"]})
+                processados.definir(str(r["id_solicitacao"]).strip(), {
+                    "status": "rejeitada", "quando": resumo["inicio"],
+                    "assinatura": assinatura_registro(r)})  # para reconhecer um reenvio corrigido
             log.warning("T3 rejeitada %s: %s", rej["id_solicitacao"], rej["motivos"])
         else:
             validas.append(limpo)

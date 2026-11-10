@@ -1,69 +1,68 @@
-21:34:37 | INFO    | main        | Portal simulado da prefeitura no ar em http://127.0.0.1:8765
-21:34:37 | INFO    | leitura     | app156_2026-11-03.csv: encoding=utf_8, separador=','
-21:34:37 | INFO    | pipeline    | T1 app156_2026-11-03.csv: 12 registros
-21:34:37 | ERROR   | leitura     | QUARENTENA: exportacao_interrompida.json (JSONDecodeError: Unterminated string starting at: line 1 column 46 (char 45))
-21:34:37 | INFO    | pipeline    | T1 formulario_site.json: 5 registros
-21:34:37 | INFO    | pipeline    | T1 subprefeitura_lote.xlsx: 7 registros
-21:34:37 | INFO    | leitura     | totem_legado.csv: encoding=cp1252, separador=';'
-21:34:37 | INFO    | pipeline    | T1 totem_legado.csv: 7 registros
-21:34:37 | INFO    | pipeline    | T2 ignoradas: 1 duplicadas no lote, 0 ja processadas antes
-21:34:37 | INFO    | validacao   | APP-0004: dados pessoais mascarados no texto (telefone)
-21:34:37 | WARNING | pipeline    | T3 rejeitada APP-0099: localização não identificada (bairro e coordenadas inválidos)
-21:34:37 | INFO    | validacao   | WEB-0004: dados pessoais mascarados no texto (cpf)
-21:34:37 | WARNING | pipeline    | T3 rejeitada TOT-0002: data no futuro
-21:34:37 | WARNING | pipeline    | T3 rejeitada TOT-0007: descrição muito curta para entender o problema
-21:34:37 | INFO    | pipeline    | T4 WEB-0001 -> REVISAO HUMANA (sugestao pavimentacao, 48%)
-21:34:37 | INFO    | pipeline    | T4 WEB-0002 -> REVISAO HUMANA (sugestao iluminacao, 34%)
-21:34:37 | INFO    | pipeline    | T4 SUB-0006 -> REVISAO HUMANA (sugestao iluminacao, 30%)
-21:34:37 | INFO    | pipeline    | T4 SUB-0007 -> REVISAO HUMANA (sugestao pavimentacao, 53%)
-21:34:37 | INFO    | pipeline    | T5 APP-0001: pavimentacao / ALTA (categoria pavimentacao (peso 2); RISCO: risco de queda ou acidente)
-21:34:37 | INFO    | pipeline    | T5 APP-0002: iluminacao / MÉDIA (categoria iluminacao (peso 2); problema antigo ou reincidente (+1))
-21:34:37 | INFO    | pipeline    | T5 APP-0003: limpeza / BAIXA (categoria limpeza (peso 1))
-21:34:40 | INFO    | pipeline    | T5 APP-0004: drenagem / MÉDIA (categoria drenagem (peso 2); chuva prevista baixa: 0 mm em 24h)
-21:34:42 | INFO    | pipeline    | T5 APP-0005: arvores / ALTA (categoria arvores (peso 2); RISCO: pessoas vulneráveis por perto, risco de queda ou acidente; chuva prevista baixa: 0 mm em 24h)
-21:34:42 | INFO    | pipeline    | T5 APP-0006: pavimentacao / MÉDIA (categoria pavimentacao (peso 2))
-21:34:42 | INFO    | pipeline    | T5 APP-0007: iluminacao / MÉDIA (categoria iluminacao (peso 2))
-21:34:44 | INFO    | pipeline    | T5 APP-0008: arvores / ALTA (categoria arvores (peso 2); RISCO: pessoas vulneráveis por perto, risco de queda ou acidente; chuva prevista baixa: 0.1 mm em 24h)
-21:34:44 | INFO    | pipeline    | T5 APP-0009: limpeza / MÉDIA (categoria limpeza (peso 1); problema antigo ou reincidente (+1))
-21:34:44 | INFO    | pipeline    | T5 APP-0010: drenagem / ALTA (categoria drenagem (peso 2); RISCO: pessoas vulneráveis por perto, risco de queda ou acidente, buraco sem proteção; chuva prevista baixa: 0.1 mm em 24h)
-21:34:44 | INFO    | pipeline    | T5 WEB-0003: limpeza / MÉDIA (categoria limpeza (peso 1); problema antigo ou reincidente (+1))
-21:34:46 | INFO    | pipeline    | T5 WEB-0004: drenagem / MÉDIA (categoria drenagem (peso 2); chuva prevista baixa: 0.2 mm em 24h)
-21:34:48 | INFO    | pipeline    | T5 WEB-0005: arvores / ALTA (categoria arvores (peso 2); RISCO: pessoas vulneráveis por perto; chuva prevista baixa: 0 mm em 24h)
-21:34:48 | INFO    | pipeline    | T5 SUB-0001: pavimentacao / ALTA (categoria pavimentacao (peso 2); RISCO: risco de queda ou acidente)
-21:34:48 | INFO    | pipeline    | T5 SUB-0002: iluminacao / MÉDIA (categoria iluminacao (peso 2))
-21:34:48 | INFO    | pipeline    | T5 SUB-0003: limpeza / BAIXA (categoria limpeza (peso 1))
-21:34:48 | INFO    | pipeline    | T5 SUB-0004: drenagem / MÉDIA (categoria drenagem (peso 2); chuva prevista baixa: 0.2 mm em 24h)
-21:34:49 | INFO    | pipeline    | T5 SUB-0005: arvores / ALTA (categoria arvores (peso 2); RISCO: risco de queda ou acidente; chuva prevista baixa: 0.1 mm em 24h)
-21:34:49 | INFO    | pipeline    | T5 TOT-0001: pavimentacao / MÉDIA (categoria pavimentacao (peso 2))
-21:34:49 | INFO    | pipeline    | T5 TOT-0003: limpeza / MÉDIA (categoria limpeza (peso 1); problema antigo ou reincidente (+1))
-21:34:49 | INFO    | pipeline    | T5 TOT-0004: drenagem / ALTA (categoria drenagem (peso 2); RISCO: água invadindo casas; chuva prevista baixa: 0.1 mm em 24h)
-21:34:52 | INFO    | pipeline    | T5 TOT-0005: arvores / ALTA (categoria arvores (peso 2); RISCO: pessoas vulneráveis por perto; chuva prevista baixa: 0 mm em 24h)
-21:34:52 | INFO    | pipeline    | T5 TOT-0006: arvores / MÉDIA (categoria arvores (peso 2); chuva prevista baixa: 0.2 mm em 24h)
-21:34:53 | INFO    | rpa_portal  | Login no portal feito com sucesso
-21:34:53 | INFO    | pipeline    | T6 APP-0001 registrada: protocolo ZEL-2026-000001
-21:34:53 | INFO    | pipeline    | T6 APP-0002 registrada: protocolo ZEL-2026-000002
-21:34:54 | INFO    | pipeline    | T6 APP-0003 registrada: protocolo ZEL-2026-000003
-21:34:54 | INFO    | pipeline    | T6 APP-0004 registrada: protocolo ZEL-2026-000004
-21:34:54 | INFO    | pipeline    | T6 APP-0005 registrada: protocolo ZEL-2026-000005
-21:34:55 | INFO    | pipeline    | T6 APP-0006 registrada: protocolo ZEL-2026-000006
-21:34:55 | INFO    | pipeline    | T6 APP-0007 registrada: protocolo ZEL-2026-000007
-21:34:55 | INFO    | pipeline    | T6 APP-0008 registrada: protocolo ZEL-2026-000008
-21:34:56 | INFO    | pipeline    | T6 APP-0009 registrada: protocolo ZEL-2026-000009
-21:34:56 | INFO    | pipeline    | T6 APP-0010 registrada: protocolo ZEL-2026-000010
-21:34:56 | INFO    | pipeline    | T6 WEB-0003 registrada: protocolo ZEL-2026-000011
-21:34:57 | INFO    | pipeline    | T6 WEB-0004 registrada: protocolo ZEL-2026-000012
-21:34:57 | INFO    | pipeline    | T6 WEB-0005 registrada: protocolo ZEL-2026-000013
-21:34:57 | INFO    | pipeline    | T6 SUB-0001 registrada: protocolo ZEL-2026-000014
-21:34:57 | INFO    | pipeline    | T6 SUB-0002 registrada: protocolo ZEL-2026-000015
-21:34:58 | INFO    | pipeline    | T6 SUB-0003 registrada: protocolo ZEL-2026-000016
-21:34:58 | INFO    | pipeline    | T6 SUB-0004 registrada: protocolo ZEL-2026-000017
-21:34:58 | INFO    | pipeline    | T6 SUB-0005 registrada: protocolo ZEL-2026-000018
-21:34:59 | INFO    | pipeline    | T6 TOT-0001 registrada: protocolo ZEL-2026-000019
-21:34:59 | INFO    | pipeline    | T6 TOT-0003 registrada: protocolo ZEL-2026-000020
-21:35:00 | INFO    | pipeline    | T6 TOT-0004 registrada: protocolo ZEL-2026-000021
-21:35:00 | INFO    | pipeline    | T6 TOT-0005 registrada: protocolo ZEL-2026-000022
-21:35:00 | INFO    | pipeline    | T6 TOT-0006 registrada: protocolo ZEL-2026-000023
-21:35:03 | INFO    | relatorio   | Planilha gerada: relatorio_20261104_213503.xlsx
-21:35:03 | INFO    | relatorio   | Relatorio de execucao: execucao_20261104_213503.json
-21:35:03 | INFO    | pipeline    | FIM: 31 lidos | 23 registradas | 4 revisao humana | 3 rejeitadas | 0 pendentes | 1 quarentena | 0 ja processadas | 25.5s
-
+2026-11-10 19:13:14,731 | INFO    | main        | Portal simulado da prefeitura no ar em http://127.0.0.1:8765
+2026-11-10 19:13:14,735 | INFO    | leitura     | app156_2026-11-03.csv: encoding=utf_8, separador=','
+2026-11-10 19:13:14,742 | INFO    | pipeline    | T1 app156_2026-11-03.csv: 12 registros
+2026-11-10 19:13:14,749 | ERROR   | leitura     | QUARENTENA: exportacao_interrompida.json (JSONDecodeError: Unterminated string starting at: line 1 column 46 (char 45))
+2026-11-10 19:13:14,752 | INFO    | pipeline    | T1 formulario_site.json: 5 registros
+2026-11-10 19:13:14,765 | INFO    | pipeline    | T1 subprefeitura_lote.xlsx: 7 registros
+2026-11-10 19:13:15,011 | INFO    | leitura     | totem_legado.csv: encoding=cp1252, separador=';'
+2026-11-10 19:13:15,014 | INFO    | pipeline    | T1 totem_legado.csv: 7 registros
+2026-11-10 19:13:15,014 | INFO    | pipeline    | T2 ignoradas: 1 duplicadas no lote, 0 ja processadas antes
+2026-11-10 19:13:15,015 | INFO    | validacao   | APP-0004: dados pessoais mascarados no texto (telefone)
+2026-11-10 19:13:15,017 | WARNING | pipeline    | T3 rejeitada APP-0099: localização não identificada (bairro e coordenadas inválidos)
+2026-11-10 19:13:15,017 | INFO    | validacao   | WEB-0004: dados pessoais mascarados no texto (cpf)
+2026-11-10 19:13:15,020 | WARNING | pipeline    | T3 rejeitada TOT-0002: data no futuro
+2026-11-10 19:13:15,021 | WARNING | pipeline    | T3 rejeitada TOT-0007: descrição muito curta para entender o problema
+2026-11-10 19:13:15,054 | INFO    | pipeline    | T4 WEB-0001 -> REVISAO HUMANA (sugestao pavimentacao, 48%)
+2026-11-10 19:13:15,056 | INFO    | pipeline    | T4 WEB-0002 -> REVISAO HUMANA (sugestao iluminacao, 34%)
+2026-11-10 19:13:15,058 | INFO    | pipeline    | T4 SUB-0006 -> REVISAO HUMANA (sugestao iluminacao, 30%)
+2026-11-10 19:13:15,059 | INFO    | pipeline    | T4 SUB-0007 -> REVISAO HUMANA (sugestao pavimentacao, 53%)
+2026-11-10 19:13:15,060 | INFO    | pipeline    | T5 APP-0001: pavimentacao / ALTA (categoria pavimentacao (peso 2); RISCO: risco de queda ou acidente)
+2026-11-10 19:13:15,060 | INFO    | pipeline    | T5 APP-0002: iluminacao / MÉDIA (categoria iluminacao (peso 2); problema antigo ou reincidente (+1))
+2026-11-10 19:13:15,060 | INFO    | pipeline    | T5 APP-0003: limpeza / BAIXA (categoria limpeza (peso 1))
+2026-11-10 19:13:15,878 | INFO    | pipeline    | T5 APP-0004: drenagem / MÉDIA (categoria drenagem (peso 2); chuva prevista baixa: 0.8 mm em 24h)
+2026-11-10 19:13:16,689 | INFO    | pipeline    | T5 APP-0005: arvores / ALTA (categoria arvores (peso 2); RISCO: pessoas vulneráveis por perto, risco de queda ou acidente; chuva prevista baixa: 0.4 mm em 24h)
+2026-11-10 19:13:16,690 | INFO    | pipeline    | T5 APP-0006: pavimentacao / MÉDIA (categoria pavimentacao (peso 2))
+2026-11-10 19:13:16,690 | INFO    | pipeline    | T5 APP-0007: iluminacao / MÉDIA (categoria iluminacao (peso 2))
+2026-11-10 19:13:17,504 | INFO    | pipeline    | T5 APP-0008: arvores / ALTA (categoria arvores (peso 2); RISCO: pessoas vulneráveis por perto, risco de queda ou acidente; chuva prevista baixa: 0.2 mm em 24h)
+2026-11-10 19:13:17,504 | INFO    | pipeline    | T5 APP-0009: limpeza / MÉDIA (categoria limpeza (peso 1); problema antigo ou reincidente (+1))
+2026-11-10 19:13:17,504 | INFO    | pipeline    | T5 APP-0010: drenagem / ALTA (categoria drenagem (peso 2); RISCO: pessoas vulneráveis por perto, risco de queda ou acidente, buraco sem proteção; chuva prevista baixa: 0.2 mm em 24h)
+2026-11-10 19:13:17,504 | INFO    | pipeline    | T5 WEB-0003: limpeza / MÉDIA (categoria limpeza (peso 1); problema antigo ou reincidente (+1))
+2026-11-10 19:13:19,832 | INFO    | pipeline    | T5 WEB-0004: drenagem / MÉDIA (categoria drenagem (peso 2); chuva prevista baixa: 0.6 mm em 24h)
+2026-11-10 19:13:20,634 | INFO    | pipeline    | T5 WEB-0005: arvores / ALTA (categoria arvores (peso 2); RISCO: pessoas vulneráveis por perto; chuva prevista baixa: 1.2 mm em 24h)
+2026-11-10 19:13:20,635 | INFO    | pipeline    | T5 SUB-0001: pavimentacao / ALTA (categoria pavimentacao (peso 2); RISCO: risco de queda ou acidente)
+2026-11-10 19:13:20,635 | INFO    | pipeline    | T5 SUB-0002: iluminacao / MÉDIA (categoria iluminacao (peso 2))
+2026-11-10 19:13:20,635 | INFO    | pipeline    | T5 SUB-0003: limpeza / BAIXA (categoria limpeza (peso 1))
+2026-11-10 19:13:21,411 | INFO    | pipeline    | T5 SUB-0004: drenagem / MÉDIA (categoria drenagem (peso 2); chuva prevista baixa: 0.7 mm em 24h)
+2026-11-10 19:13:22,899 | INFO    | pipeline    | T5 SUB-0005: arvores / ALTA (categoria arvores (peso 2); RISCO: risco de queda ou acidente; chuva prevista baixa: 0.3 mm em 24h)
+2026-11-10 19:13:22,900 | INFO    | pipeline    | T5 TOT-0001: pavimentacao / MÉDIA (categoria pavimentacao (peso 2))
+2026-11-10 19:13:22,900 | INFO    | pipeline    | T5 TOT-0003: limpeza / MÉDIA (categoria limpeza (peso 1); problema antigo ou reincidente (+1))
+2026-11-10 19:13:22,900 | INFO    | pipeline    | T5 TOT-0004: drenagem / ALTA (categoria drenagem (peso 2); RISCO: água invadindo casas; chuva prevista baixa: 0.3 mm em 24h)
+2026-11-10 19:13:23,707 | INFO    | pipeline    | T5 TOT-0005: arvores / ALTA (categoria arvores (peso 2); RISCO: pessoas vulneráveis por perto; chuva prevista baixa: 1.2 mm em 24h)
+2026-11-10 19:13:23,708 | INFO    | pipeline    | T5 TOT-0006: arvores / MÉDIA (categoria arvores (peso 2); chuva prevista baixa: 0.7 mm em 24h)
+2026-11-10 19:13:25,100 | INFO    | rpa_portal  | Login no portal feito com sucesso
+2026-11-10 19:13:25,692 | INFO    | pipeline    | T6 APP-0001 registrada: protocolo ZEL-2026-000001
+2026-11-10 19:13:26,263 | INFO    | pipeline    | T6 APP-0002 registrada: protocolo ZEL-2026-000002
+2026-11-10 19:13:26,837 | INFO    | pipeline    | T6 APP-0003 registrada: protocolo ZEL-2026-000003
+2026-11-10 19:13:27,385 | INFO    | pipeline    | T6 APP-0004 registrada: protocolo ZEL-2026-000004
+2026-11-10 19:13:28,005 | INFO    | pipeline    | T6 APP-0005 registrada: protocolo ZEL-2026-000005
+2026-11-10 19:13:28,504 | INFO    | pipeline    | T6 APP-0006 registrada: protocolo ZEL-2026-000006
+2026-11-10 19:13:29,018 | INFO    | pipeline    | T6 APP-0007 registrada: protocolo ZEL-2026-000007
+2026-11-10 19:13:29,512 | INFO    | pipeline    | T6 APP-0008 registrada: protocolo ZEL-2026-000008
+2026-11-10 19:13:30,031 | INFO    | pipeline    | T6 APP-0009 registrada: protocolo ZEL-2026-000009
+2026-11-10 19:13:30,520 | INFO    | pipeline    | T6 APP-0010 registrada: protocolo ZEL-2026-000010
+2026-11-10 19:13:31,074 | INFO    | pipeline    | T6 WEB-0003 registrada: protocolo ZEL-2026-000011
+2026-11-10 19:13:31,678 | INFO    | pipeline    | T6 WEB-0004 registrada: protocolo ZEL-2026-000012
+2026-11-10 19:13:32,167 | INFO    | pipeline    | T6 WEB-0005 registrada: protocolo ZEL-2026-000013
+2026-11-10 19:13:32,657 | INFO    | pipeline    | T6 SUB-0001 registrada: protocolo ZEL-2026-000014
+2026-11-10 19:13:33,187 | INFO    | pipeline    | T6 SUB-0002 registrada: protocolo ZEL-2026-000015
+2026-11-10 19:13:33,744 | INFO    | pipeline    | T6 SUB-0003 registrada: protocolo ZEL-2026-000016
+2026-11-10 19:13:34,344 | INFO    | pipeline    | T6 SUB-0004 registrada: protocolo ZEL-2026-000017
+2026-11-10 19:13:34,860 | INFO    | pipeline    | T6 SUB-0005 registrada: protocolo ZEL-2026-000018
+2026-11-10 19:13:35,364 | INFO    | pipeline    | T6 TOT-0001 registrada: protocolo ZEL-2026-000019
+2026-11-10 19:13:35,842 | INFO    | pipeline    | T6 TOT-0003 registrada: protocolo ZEL-2026-000020
+2026-11-10 19:13:36,302 | INFO    | pipeline    | T6 TOT-0004 registrada: protocolo ZEL-2026-000021
+2026-11-10 19:13:36,815 | INFO    | pipeline    | T6 TOT-0005 registrada: protocolo ZEL-2026-000022
+2026-11-10 19:13:37,358 | INFO    | pipeline    | T6 TOT-0006 registrada: protocolo ZEL-2026-000023
+2026-11-10 19:13:40,150 | INFO    | relatorio   | Planilha gerada: relatorio_20261110_191339.xlsx
+2026-11-10 19:13:40,153 | INFO    | relatorio   | Relatorio de execucao: execucao_20261110_191339.json
+2026-11-10 19:13:40,153 | INFO    | pipeline    | FIM: 31 lidos | 23 registradas | 4 revisao humana | 3 rejeitadas | 0 pendentes | 1 quarentena | 0 ja processadas | 25.2s

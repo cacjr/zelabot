@@ -136,7 +136,23 @@ def rodar():
                   f"1ª execução: {len(r['pendentes'])} pendentes (CredenciaisInvalidas); "
                   f"após corrigir: {len(r2['registradas'])} registradas")
 
-        # 5) Arquivo ausente
+        # 5) Cidadao reenvia corrigida uma solicitacao que tinha sido rejeitada ("oi")
+        corrigida = PASTA_SAIDA / "demo" / "totem_reenvio_corrigido.json"
+        corrigida.write_text(json.dumps([{
+            "id_solicitacao": "TOT-0007", "data_hora": "2026-11-03 11:00", "canal": "totem",
+            "nome": "Pessoa Ficticia", "bairro": "Santana", "endereco": "Rua Teste, 20",
+            "latitude": "", "longitude": "",
+            "descricao": "Lixo e entulho acumulados na esquina há uma semana"}], ensure_ascii=False),
+            encoding="utf-8")
+        mesma = pipeline.executar()  # mesmos arquivos de antes: o "oi" continua ignorado
+        r = pipeline.executar(arquivos=[corrigida])
+        registrar("Reenvio de pedido rejeitado", "cidadão reenvia o TOT-0007 ('oi') com a descrição completa",
+                  "o reenvio corrigido é processado; o original sem mudança continua ignorado",
+                  r["reenviadas_corrigidas"] == 1 and len(r["registradas"]) == 1 and len(mesma["rejeitadas"]) == 0,
+                  f"reenvio reconhecido e registrado ({r['registradas'][0]['protocolo'] if r['registradas'] else 'sem protocolo'}); "
+                  f"arquivo original sem mudança: {len(mesma['rejeitadas'])} rejeições repetidas")
+
+        # 6) Arquivo ausente
         r = pipeline.executar(arquivos=[Path("entrada/nao_existe.csv")])
         registrar("Arquivo ausente", "caminho de arquivo que não existe",
                   "registra no log e termina a execução normalmente",

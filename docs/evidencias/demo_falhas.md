@@ -1,6 +1,6 @@
 # Demonstração de falhas tratadas
 
-Gerado automaticamente por `python main.py falhas` em 04/11/2026 22:48.
+Gerado automaticamente por `python main.py falhas` em 10/11/2026 19:13.
 
 | Cenário | Falha simulada | Esperado | Obtido | Passou? |
 | :- | :- | :- | :- | :-: |
@@ -11,4 +11,5 @@ Gerado automaticamente por `python main.py falhas` em 04/11/2026 22:48.
 | Portal instável (erro 503) | portal responde 503 a cada 4 cadastros | retry com espera recupera e a fila de pendentes zera | 23/23 registradas, 7 novas tentativas automáticas, fila de pendentes = 0 | sim |
 | Execução repetida | rodar o robô de novo com os mesmos arquivos | nada é cadastrado em dobro no portal | 31 já processadas ignoradas; portal continuou com 23 registros | sim |
 | Senha do portal errada | PORTAL_SENHA inválida no .env | não insiste no login, guarda na fila e registra quando a senha é corrigida | 1ª execução: 2 pendentes (CredenciaisInvalidas); após corrigir: 2 registradas | sim |
+| Reenvio de pedido rejeitado | cidadão reenvia o TOT-0007 ('oi') com a descrição completa | o reenvio corrigido é processado; o original sem mudança continua ignorado | reenvio reconhecido e registrado (ZEL-2026-000026); arquivo original sem mudança: 0 rejeições repetidas | sim |
 | Arquivo ausente | caminho de arquivo que não existe | registra no log e termina a execução normalmente | status do arquivo: ausente; relatório gerado normalmente | sim |

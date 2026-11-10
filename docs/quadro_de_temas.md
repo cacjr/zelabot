@@ -45,7 +45,7 @@ O enunciado pede pelo menos 3 temas da disciplina, cada um com função real no 
 
 | Falha | Caminho seguro |
 | :- | :- |
-| API de clima fora do ar | 3 tentativas com espera 1s, 2s, 4s; depois usa a última previsão salva (até 12h) ou segue sem esse critério. Após 2 falhas seguidas, um "disjuntor" para de chamar a API naquela execução. |
+| API de clima fora do ar | 3 tentativas, esperando 1 s e depois 2 s entre elas (a espera dobra a cada falha), cada uma com timeout; depois usa a última previsão salva (até 12h) ou segue sem esse critério. Após 2 falhas seguidas, um "disjuntor" para de chamar a API naquela execução. |
 | Portal fora do ar | Checagem de saúde antes de abrir o navegador; se estiver fora, tudo vai para a fila de **pendentes**, que é reprocessada na próxima execução. |
 | Portal instável (503) | Retry com espera exponencial em cada cadastro. |
 | Senha errada | Não insiste; manda para pendentes e registra o erro. |
@@ -54,6 +54,7 @@ O enunciado pede pelo menos 3 temas da disciplina, cada um com função real no 
 | Arquivo de estado travado (OneDrive, antivírus) | Tenta salvar de novo até 10 vezes, com espera crescente; se continuar travado, grava direto para não perder o dado. |
 | Dado inválido | Aba "Rejeitadas" com o motivo e uma mensagem para o cidadão. |
 | Rodar duas vezes | Idempotência: cada solicitação processada fica registrada e não é cadastrada de novo. |
+| Pedido rejeitado reenviado corrigido | O robô guarda uma assinatura do conteúdo rejeitado; se o mesmo número volta com conteúdo diferente, processa de novo em vez de ignorar. |
 | Erro inesperado | Último `try/except` no `main.py` grava o traceback completo no log. |
 
 Os logs vão para o console e para `saida/logs/zelabot_<data>.log`, no formato `hora | nível | módulo | mensagem`, e cada linha diz em qual tarefa (T1 a T9) o robô estava.

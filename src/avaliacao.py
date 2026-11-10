@@ -63,6 +63,88 @@ def _metricas_robo(df, limiar):
     }
 
 
+def intervalo_95(acertos):
+    """
+    Intervalo de confianca de 95% (Wilson) para uma taxa de acerto.
+    Com amostra pequena o intervalo fica largo, e isso precisa aparecer no relatorio.
+    Escolhemos Wilson porque ele continua informativo mesmo quando acerta 100%
+    (o bootstrap, por exemplo, devolveria [100, 100] para 23 de 23).
+    """
+    acertos = np.asarray(acertos, dtype=float)
+    n = len(acertos)
+    if n == 0:
+        return None
+    p, z = acertos.mean(), 1.96
+    centro = (p + z**2 / (2 * n)) / (1 + z**2 / n)
+    margem = z * np.sqrt(p * (1 - p) / n + z**2 / (4 * n**2)) / (1 + z**2 / n)
+    return [round(100 * float(centro - margem), 1), round(100 * float(min(1.0, centro + margem)), 1)]
+
+
+def avaliar_lote_de_entrada(clf):
+    """
+    Mede as decisoes do robo nos 31 registros da pasta entrada/, comparando com o
+    gabarito rotulado pelo grupo (dados/teste/gabarito_entrada.csv). Usa as mesmas
+    funcoes do robo (leitura, validacao, modelo e regra de risco), sem o portal,
+    entao nao mexe no estado nem cadastra nada.
+    """
+    from src import leitura, validacao
+    from src.config import PASTA_ENTRADA
+
+    gabarito = pd.read_csv(RAIZ / "dados" / "teste" / "gabarito_entrada.csv", dtype=str).fillna("")
+    gabarito = gabarito.set_index("id_solicitacao")
+    vistos, linhas = set(), []
+    for arq in leitura.listar_arquivos(PASTA_ENTRADA):
+        try:
+            registros = leitura.ler_arquivo(arq)
+        except (leitura.ArquivoInvalido, FileNotFoundError):
+            continue  # o corrompido vai para quarentena no robo; aqui so pulamos
+        for r in registros:
+            rid = str(r.get("id_solicitacao")).strip()
+            if rid in vistos or rid not in gabarito.index:
+                continue
+            vistos.add(rid)
+            limpo, motivos = validacao.validar(r)
+            if motivos:
+                decisao, categoria, urgente = "rejeitar", "", False
+            else:
+                pred = modelo.classificar(clf, [limpo["descricao"]])[0]
+                decisao = "revisao" if pred["precisa_revisao"] else "processar"
+                categoria, urgente = pred["categoria"], detectar_risco(limpo["descricao"])
+            g = gabarito.loc[rid]
+            linhas.append({"id_solicitacao": rid, "esperado": g["resultado_esperado"],
+                           "categoria_esperada": g["categoria_esperada"], "decisao": decisao,
+                           "categoria_robo": categoria, "urgente_esperado": int(g["urgente_esperado"]),
+                           "urgente_robo": int(urgente)})
+    df = pd.DataFrame(linhas)
+
+    rejeitar = df["esperado"] == "rejeitar"
+    fora = df["esperado"] == "revisao"
+    escopo = df["esperado"] == "processar"
+    automatico = df["decisao"] == "processar"
+    certo_auto = automatico & escopo & (df["categoria_robo"] == df["categoria_esperada"])
+    erro_silencioso = automatico & ~certo_auto
+    # para a urgencia so contam os pedidos que passaram da validacao
+    validos = df["decisao"] != "rejeitar"
+    u_esp, u_robo = df.loc[validos, "urgente_esperado"], df.loc[validos, "urgente_robo"]
+
+    df.to_csv(PASTA_EVID / "avaliacao_lote_entrada.csv", index=False, encoding="utf-8")
+    return {
+        "registros_unicos": len(df),
+        "rejeicoes_corretas": f"{int((rejeitar & (df['decisao'] == 'rejeitar')).sum())}/{int(rejeitar.sum())}",
+        "fora_do_escopo_para_revisao": f"{int((fora & (df['decisao'] == 'revisao')).sum())}/{int(fora.sum())}",
+        "automatizadas": int(automatico.sum()),
+        "automatizadas_com_categoria_certa": f"{int(certo_auto.sum())}/{int(automatico.sum())}",
+        "intervalo_95_acerto_automatizadas": intervalo_95(certo_auto[automatico]),
+        "no_escopo_mandadas_a_revisao": int((escopo & (df["decisao"] == "revisao")).sum()),
+        "erros_silenciosos": int(erro_silencioso.sum()),
+        "urgencia_recall": f"{int((u_esp.eq(1) & u_robo.eq(1)).sum())}/{int(u_esp.eq(1).sum())}",
+        "urgencia_alarmes_falsos": df.loc[validos & df["urgente_esperado"].eq(0) & df["urgente_robo"].eq(1),
+                                          "id_solicitacao"].tolist(),
+        "urgentes_perdidos": df.loc[validos & df["urgente_esperado"].eq(1) & df["urgente_robo"].eq(0),
+                                    "id_solicitacao"].tolist(),
+    }
+
+
 def avaliar():
     PASTA_EVID.mkdir(parents=True, exist_ok=True)
     df = pd.read_csv(ARQ_TESTE, encoding="utf-8")
@@ -104,6 +186,12 @@ def avaliar():
         },
         "palavras_que_mais_pesam": modelo.palavras_mais_importantes(clf),
     }
+    automatico = df["confianca"] >= LIMIAR_CONFIANCA
+    resultado["intervalos_95_wilson"] = {
+        "acuracia_ml_no_escopo": intervalo_95(yp == y),
+        "acerto_nas_automatizadas": intervalo_95((df["prevista"] == df["categoria_esperada"])[automatico]),
+    }
+    resultado["lote_de_entrada_com_gabarito"] = avaliar_lote_de_entrada(clf)
 
     # erros para analise
     erros = df[(df["prevista"] != df["categoria_esperada"])].copy()
@@ -140,5 +228,12 @@ def avaliar():
              "fora do escopo para revisao: %s", LIMIAR_CONFIANCA, rb["automatizadas_pct"],
              rb["acerto_nas_automatizadas_pct"], rb["erros_silenciosos"], rb["fora_escopo_para_revisao"])
     log.info("Urgencia: recall %.2f | precisao %.2f", u["recall"], u["precisao"])
+    ic = resultado["intervalos_95_wilson"]
+    log.info("Intervalo de 95%%: acuracia ML %s%% | acerto nas automatizadas %s%%",
+             ic["acuracia_ml_no_escopo"], ic["acerto_nas_automatizadas"])
+    lote = resultado["lote_de_entrada_com_gabarito"]
+    log.info("Lote de entrada (gabarito): rejeicoes %s | fora do escopo p/ revisao %s | categoria certa %s "
+             "| erros silenciosos %d | urgencia %s", lote["rejeicoes_corretas"], lote["fora_do_escopo_para_revisao"],
+             lote["automatizadas_com_categoria_certa"], lote["erros_silenciosos"], lote["urgencia_recall"])
     log.info("Arquivos salvos em %s", PASTA_EVID.relative_to(RAIZ))
     return resultado

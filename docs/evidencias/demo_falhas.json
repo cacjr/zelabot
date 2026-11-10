@@ -49,6 +49,13 @@
     "ok": true
   },
   {
+    "cenario": "Reenvio de pedido rejeitado",
+    "falha_simulada": "cidadão reenvia o TOT-0007 ('oi') com a descrição completa",
+    "esperado": "o reenvio corrigido é processado; o original sem mudança continua ignorado",
+    "obtido": "reenvio reconhecido e registrado (ZEL-2026-000026); arquivo original sem mudança: 0 rejeições repetidas",
+    "ok": true
+  },
+  {
     "cenario": "Arquivo ausente",
     "falha_simulada": "caminho de arquivo que não existe",
     "esperado": "registra no log e termina a execução normalmente",

@@ -143,3 +143,10 @@ def test_estado_salva_mesmo_com_arquivo_travado(monkeypatch):
     assert falhas["n"] == 2
     assert resiliencia.RegistroJSON("teste_travado").get("X-1") == {"status": "ok"}
     reg.caminho.unlink()
+
+def test_reenvio_corrigido_tem_assinatura_diferente():
+    from src.pipeline import assinatura_registro
+    original = registro_ok(descricao="oi")
+    corrigido = registro_ok(descricao="Lixo e entulho acumulados na esquina há uma semana")
+    assert assinatura_registro(original) == assinatura_registro(dict(original))
+    assert assinatura_registro(original) != assinatura_registro(corrigido)
