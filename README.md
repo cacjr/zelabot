@@ -9,7 +9,7 @@ Robô que recebe reclamações de zeladoria (buraco, poste apagado, lixo, bueiro
 Nome | RM | Contribuição
 Claudio Alves | RM568565 | Desenvolvimento do robô e documentação
 Gustavo Duarte | RM567066 | Revisão do conjunto de teste e da avaliação
-Leonardo Pereira | RM567836 | Revisão do gabarito e dos casos de falha
+Leonardo Pereira | RM567836 | Revisão do gabarito e dos casos de falha 
 
 ## O problema
 
