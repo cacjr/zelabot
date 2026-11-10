@@ -80,10 +80,60 @@ def intervalo_95(acertos):
     return [round(100 * float(centro - margem), 1), round(100 * float(min(1.0, centro + margem)), 1)]
 
 
+LIMIARES_CANDIDATOS = [round(float(x), 2) for x in np.arange(0.30, 0.71, 0.05)]
+AUTOMACAO_MINIMA = 0.65
+
+
+def escolher_limiar(df):
+    """
+    Regra fixa de escolha: o limiar com maior acerto no que e automatizado,
+    desde que pelo menos 65% dos casos continuem automatizados.
+    Empate: o menor limiar (automatiza mais).
+    """
+    melhor, melhor_acerto = LIMIARES_CANDIDATOS[0], -1.0
+    for limiar in LIMIARES_CANDIDATOS:
+        automatico = df["confianca"] >= limiar
+        if automatico.mean() < AUTOMACAO_MINIMA or not automatico.any():
+            continue
+        acerto = (df["prevista"] == df["categoria_esperada"])[automatico].mean()
+        if acerto > melhor_acerto:
+            melhor, melhor_acerto = limiar, acerto
+    return melhor
+
+
+def limiar_validacao_aninhada(df, dobras=5, semente=42):
+    """
+    Estimativa sem vies de selecao: em cada dobra o limiar e escolhido nas outras
+    dobras e medido so na dobra que ficou de fora.
+    """
+    from sklearn.model_selection import StratifiedKFold
+    skf = StratifiedKFold(n_splits=dobras, shuffle=True, random_state=semente)
+    escolhidos, acertos_fora, n_total, n_auto, silenciosos = [], [], 0, 0, 0
+    for idx_escolha, idx_medida in skf.split(df, df["categoria_esperada"]):
+        limiar = escolher_limiar(df.iloc[idx_escolha])
+        medida = df.iloc[idx_medida]
+        automatico = medida["confianca"] >= limiar
+        certo = medida["prevista"] == medida["categoria_esperada"]
+        escolhidos.append(limiar)
+        acertos_fora.extend(certo[automatico].tolist())
+        n_total += len(medida)
+        n_auto += int(automatico.sum())
+        silenciosos += int((automatico & ~certo).sum())
+    return {
+        "regra": f"maior acerto no automatizado com automacao >= {AUTOMACAO_MINIMA:.0%}",
+        "limiar_escolhido_em_cada_dobra": escolhidos,
+        "limiar_escolhido_com_todos_os_dados": escolher_limiar(df),
+        "automatizadas_pct": round(100 * n_auto / n_total, 1),
+        "acerto_nas_automatizadas_pct": round(100 * float(np.mean(acertos_fora)), 1),
+        "intervalo_95": intervalo_95(acertos_fora),
+        "erros_silenciosos": silenciosos,
+    }
+
+
 def avaliar_lote_de_entrada(clf):
     """
     Mede as decisoes do robo nos 31 registros da pasta entrada/, comparando com o
-    gabarito rotulado pelo grupo (dados/teste/gabarito_entrada.csv). Usa as mesmas
+    gabarito rotulado manualmente (dados/teste/gabarito_entrada.csv). Usa as mesmas
     funcoes do robo (leitura, validacao, modelo e regra de risco), sem o portal,
     entao nao mexe no estado nem cadastra nada.
     """
@@ -191,6 +241,7 @@ def avaliar():
         "acuracia_ml_no_escopo": intervalo_95(yp == y),
         "acerto_nas_automatizadas": intervalo_95((df["prevista"] == df["categoria_esperada"])[automatico]),
     }
+    resultado["limiar_validacao_aninhada"] = limiar_validacao_aninhada(df)
     resultado["lote_de_entrada_com_gabarito"] = avaliar_lote_de_entrada(clf)
 
     # erros para analise
@@ -231,6 +282,11 @@ def avaliar():
     ic = resultado["intervalos_95_wilson"]
     log.info("Intervalo de 95%%: acuracia ML %s%% | acerto nas automatizadas %s%%",
              ic["acuracia_ml_no_escopo"], ic["acerto_nas_automatizadas"])
+    an = resultado["limiar_validacao_aninhada"]
+    log.info("Limiar sem vies (validacao aninhada): dobras escolheram %s | automatiza %.1f%% | acerta %.1f%% %s "
+             "| %d erros silenciosos | com todos os dados a regra escolhe %.2f",
+             an["limiar_escolhido_em_cada_dobra"], an["automatizadas_pct"], an["acerto_nas_automatizadas_pct"],
+             an["intervalo_95"], an["erros_silenciosos"], an["limiar_escolhido_com_todos_os_dados"])
     lote = resultado["lote_de_entrada_com_gabarito"]
     log.info("Lote de entrada (gabarito): rejeicoes %s | fora do escopo p/ revisao %s | categoria certa %s "
              "| erros silenciosos %d | urgencia %s", lote["rejeicoes_corretas"], lote["fora_do_escopo_para_revisao"],

@@ -5,11 +5,16 @@ Tudo que pode mudar entre maquinas (URLs, usuario e senha do portal, limiares)
 vem do arquivo .env, que NAO vai para o Git. O .env.example mostra o formato.
 """
 import os
+import shutil
 from pathlib import Path
 
 from dotenv import load_dotenv
 
 RAIZ = Path(__file__).resolve().parent.parent
+# sem .env, cria um a partir do modelo para o robo rodar de primeira
+if not (RAIZ / ".env").exists() and (RAIZ / ".env.example").exists():
+    shutil.copy(RAIZ / ".env.example", RAIZ / ".env")
+    print("Arquivo .env criado a partir do .env.example (troque a senha e o sal se quiser).")
 load_dotenv(RAIZ / ".env")
 
 
@@ -28,6 +33,8 @@ PASTA_MODELOS = RAIZ / "modelos"
 ARQ_TREINO = RAIZ / "dados" / "treino" / "solicitacoes_treino.csv"
 ARQ_TESTE = RAIZ / "dados" / "teste" / "teste_rotulado.csv"
 ARQ_MODELO = PASTA_MODELOS / "classificador.joblib"
+# opcional: modelo treinado em outra disciplina (pipeline scikit-learn com predict_proba)
+MODELO_EXTERNO = _env("MODELO_EXTERNO")
 
 # Portal da prefeitura (sistema legado simulado, acessado via Selenium)
 PORTAL_URL = _env("PORTAL_URL", "http://127.0.0.1:8765")
@@ -35,6 +42,7 @@ PORTAL_USUARIO = _env("PORTAL_USUARIO")
 PORTAL_SENHA = _env("PORTAL_SENHA")
 PORTAL_EMBUTIDO = _env("PORTAL_EMBUTIDO", "1") == "1"  # sobe o portal local junto com o robo
 NAVEGADOR_VISIVEL = _env("NAVEGADOR_VISIVEL", "0") == "1"
+NAVEGADOR = (_env("NAVEGADOR", "auto") or "auto").lower()  # auto | chrome | edge
 # opcional: caminho de um chromedriver ja instalado (senao o Selenium Manager baixa sozinho)
 CHROMEDRIVER_PATH = _env("CHROMEDRIVER_PATH")
 

@@ -21,7 +21,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import cross_val_score
 from sklearn.pipeline import FeatureUnion, Pipeline
 
-from src.config import ARQ_MODELO, ARQ_TREINO, LIMIAR_CONFIANCA
+from src.config import ARQ_MODELO, ARQ_TREINO, LIMIAR_CONFIANCA, MODELO_EXTERNO
 from src.logs import obter_logger
 from src.validacao import normalizar
 
@@ -60,8 +60,23 @@ def treinar(salvar=True) -> Pipeline:
     return pipeline
 
 
+def _carregar_externo():
+    """Modelo de outra disciplina: so e aceito se tiver predict_proba e as mesmas categorias."""
+    try:
+        externo = joblib.load(MODELO_EXTERNO)
+        if not hasattr(externo, "predict_proba") or not set(externo.classes_) <= set(CATEGORIAS):
+            raise ValueError(f"o modelo precisa de predict_proba e categorias dentro de {CATEGORIAS}")
+        log.info("Usando modelo externo: %s", MODELO_EXTERNO)
+        return externo
+    except Exception as erro:
+        log.error("Modelo externo invalido (%s). Usando o modelo proprio.", erro)
+        return None
+
+
 def carregar() -> Pipeline:
     """Carrega o modelo salvo; se nao existir ou estiver quebrado, treina de novo."""
+    if MODELO_EXTERNO and (externo := _carregar_externo()) is not None:
+        return externo
     if ARQ_MODELO.exists():
         try:
             return joblib.load(ARQ_MODELO)
@@ -89,6 +104,8 @@ def classificar(modelo: Pipeline, textos: list[str], limiar=LIMIAR_CONFIANCA) ->
 
 def palavras_mais_importantes(modelo: Pipeline, n=6) -> dict:
     """Mostra quais palavras mais pesam em cada categoria (ajuda a explicar o modelo)."""
+    if not hasattr(modelo, "named_steps") or "tfidf" not in modelo.named_steps:
+        return {}  # modelo externo com outra estrutura
     vetor_palavras = modelo.named_steps["tfidf"].transformer_list[0][1]
     nomes = vetor_palavras.get_feature_names_out()
     coef = modelo.named_steps["clf"].coef_[:, :len(nomes)]

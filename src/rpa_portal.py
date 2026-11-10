@@ -23,8 +23,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select, WebDriverWait
 
-from src.config import (CHROMEDRIVER_PATH, NAVEGADOR_VISIVEL, PASTA_SAIDA, PORTAL_SENHA,
-                        PORTAL_URL, PORTAL_USUARIO, TIMEOUT_SEGUNDOS)
+from src.config import (CHROMEDRIVER_PATH, NAVEGADOR, NAVEGADOR_VISIVEL, PASTA_SAIDA,
+                        PORTAL_SENHA, PORTAL_URL, PORTAL_USUARIO, TIMEOUT_SEGUNDOS)
 from src.logs import obter_logger
 from src.resiliencia import com_retry
 
@@ -73,18 +73,34 @@ class RoboPortal:
         self.fechar()
         return False  # nao engole excecoes
 
-    def abrir(self):
-        opcoes = webdriver.ChromeOptions()
+    @staticmethod
+    def _criar_driver(nome):
+        opcoes = webdriver.ChromeOptions() if nome == "chrome" else webdriver.EdgeOptions()
         if not NAVEGADOR_VISIVEL:
             opcoes.add_argument("--headless=new")
         opcoes.add_argument("--window-size=1100,900")
-        try:
+        if nome == "chrome":
             if CHROMEDRIVER_PATH:
-                self.driver = webdriver.Chrome(options=opcoes, service=Service(CHROMEDRIVER_PATH))
-            else:
-                self.driver = webdriver.Chrome(options=opcoes)  # Selenium Manager acha o driver sozinho
-        except WebDriverException as erro:
-            raise PortalIndisponivel(f"nao consegui abrir o Chrome: {erro.msg}") from erro
+                return webdriver.Chrome(options=opcoes, service=Service(CHROMEDRIVER_PATH))
+            return webdriver.Chrome(options=opcoes)  # Selenium Manager acha o driver sozinho
+        return webdriver.Edge(options=opcoes)
+
+    def abrir(self):
+        # "auto": tenta o Chrome e, se nao abrir, o Edge (que vem em todo Windows)
+        ordem = ["chrome", "edge"] if NAVEGADOR == "auto" else [NAVEGADOR]
+        falhas = []
+        for nome in ordem:
+            try:
+                self.driver = self._criar_driver(nome)
+                log.info("Navegador: %s", nome)
+                break
+            except WebDriverException as erro:
+                falhas.append(f"{nome}: {(erro.msg or str(erro)).splitlines()[0][:90]}")
+                log.warning("Nao consegui abrir o %s. %s", nome,
+                            "Tentando o proximo navegador." if nome != ordem[-1] else "")
+        if not self.driver:
+            raise PortalIndisponivel("nenhum navegador abriu (" + " | ".join(falhas) + "). "
+                                     "Instale o Chrome ou o Edge, ou defina CHROMEDRIVER_PATH no .env")
         self.driver.set_page_load_timeout(TIMEOUT_SEGUNDOS * 2)
         self.espera = WebDriverWait(self.driver, TIMEOUT_SEGUNDOS)
         self._login()

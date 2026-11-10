@@ -6,6 +6,7 @@ ZelaBot - ponto de entrada.
     python main.py avaliar    mede o modelo no conjunto de teste rotulado
     python main.py falhas     roda a demonstracao dos casos de falha
     python main.py treinar    retreina o classificador
+    python main.py verificar  confere se o ambiente esta pronto (Python, pacotes, .env, navegador, internet)
     python main.py reset      apaga estado e saidas para rodar do zero
 """
 import shutil
@@ -117,6 +118,52 @@ def cmd_falhas():
     demo_falhas.rodar()
 
 
+def cmd_verificar():
+    """Diagnostico rapido antes da primeira execucao."""
+    import importlib.util
+    import os
+
+    import requests
+
+    from src import leitura
+    from src.config import CLIMA_API_URL, NAVEGADOR
+    resultados = []
+
+    def checar(nome, ok, dica=""):
+        resultados.append(ok)
+        print(f"  [{'OK' if ok else 'FALHA'}] {nome}" + ("" if ok else f"  ->  {dica}"))
+
+    print("\nVerificando o ambiente do ZelaBot:\n")
+    checar(f"Python {sys.version.split()[0]}", sys.version_info >= (3, 11), "instale o Python 3.11 ou mais novo")
+    faltando = [p for p in ("pandas", "sklearn", "selenium", "xlsxwriter", "python_calamine", "watchdog",
+                            "psutil", "dotenv", "requests", "matplotlib")
+                if importlib.util.find_spec(p) is None]
+    checar("Bibliotecas instaladas", not faltando, f"rode pip install -r requirements.txt (faltam: {faltando})")
+    checar("Arquivo .env com senha do portal", bool(os.getenv("PORTAL_SENHA")), "copie o .env.example para .env")
+    checar(f"Arquivos de entrada ({len(leitura.listar_arquivos(PASTA_ENTRADA))})",
+           bool(leitura.listar_arquivos(PASTA_ENTRADA)), "rode python dados/gerar_dados.py")
+    try:
+        requests.get(CLIMA_API_URL, params={"latitude": -23.55, "longitude": -46.63,
+                                            "hourly": "precipitation", "forecast_days": 1}, timeout=5)
+        internet = True
+    except requests.RequestException:
+        internet = False
+    checar("Internet / API de clima", internet, "sem internet o robo roda, mas sem o criterio de chuva")
+    from src.rpa_portal import RoboPortal
+    abriu = None
+    for nome in (["chrome", "edge"] if NAVEGADOR == "auto" else [NAVEGADOR]):
+        try:
+            RoboPortal._criar_driver(nome).quit()
+            abriu = nome
+            break
+        except Exception:
+            continue
+    checar(f"Navegador para o Selenium ({abriu or 'nenhum'})", abriu is not None,
+           "instale o Chrome ou o Edge; sem navegador as solicitacoes ficam em pendentes")
+    print("\nTudo pronto: rode python main.py\n" if all(resultados)
+          else "\nCorrija os itens com FALHA acima (o robo ainda roda, usando os caminhos seguros).\n")
+
+
 def cmd_treinar():
     from src import modelo
     modelo.treinar()
@@ -132,7 +179,8 @@ def cmd_reset():
 
 
 COMANDOS = {"executar": cmd_executar, "vigiar": cmd_vigiar, "avaliar": cmd_avaliar,
-            "falhas": cmd_falhas, "treinar": cmd_treinar, "reset": cmd_reset}
+            "falhas": cmd_falhas, "treinar": cmd_treinar, "verificar": cmd_verificar,
+            "reset": cmd_reset}
 
 if __name__ == "__main__":
     comando = sys.argv[1] if len(sys.argv) > 1 else "executar"

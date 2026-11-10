@@ -220,6 +220,24 @@
       97.5
     ]
   },
+  "limiar_validacao_aninhada": {
+    "regra": "maior acerto no automatizado com automacao >= 65%",
+    "limiar_escolhido_em_cada_dobra": [
+      0.55,
+      0.55,
+      0.65,
+      0.55,
+      0.65
+    ],
+    "limiar_escolhido_com_todos_os_dados": 0.55,
+    "automatizadas_pct": 69.5,
+    "acerto_nas_automatizadas_pct": 95.1,
+    "intervalo_95": [
+      83.9,
+      98.7
+    ],
+    "erros_silenciosos": 2
+  },
   "lote_de_entrada_com_gabarito": {
     "registros_unicos": 30,
     "rejeicoes_corretas": "3/3",
