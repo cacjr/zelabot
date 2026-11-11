@@ -32,6 +32,8 @@ Todos os resultados são reproduzíveis pelos comandos indicados. Arquivos de ap
 
 **Comparação com gabarito.** Os 30 registros únicos foram rotulados em [gabarito_entrada.csv](../dados/teste/gabarito_entrada.csv) com a decisão esperada, a categoria e a urgência. O `python main.py avaliar` compara automaticamente ([detalhe por registro](evidencias/avaliacao_lote_entrada.csv)):
 
+Gabarito revisado por Leonardo Pereira em 11/11/2026.
+
 | Medida | Resultado |
 | :- | :- |
 | Automatizadas na categoria certa | **23/23** (IC 95%: 85,7% a 100%) |
