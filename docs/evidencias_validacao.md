@@ -51,6 +51,8 @@ O "fio soltando faísca" foi para revisão por confiança baixa (34%), mas marca
 
 **Comando:** `python main.py avaliar` · **Amostra:** [teste_rotulado.csv](../dados/teste/teste_rotulado.csv), 59 frases escritas à mão, com vocabulário diferente do treino (51 no escopo, 8 fora).
 
+Rótulos revisados por Gustavo Duarte em 10/11/2026.
+
 Na validação cruzada do treino o F1 é 1,00, sinal de que as frases sintéticas são parecidas demais entre si. Por isso o teste é separado e escrito de outra forma.
 
 ### 2.1 Classificador (51 frases do escopo)
